@@ -6,6 +6,8 @@ service = build('youtube', 'v3', developerKey=API_Key)
 vidID = "m0RWSHdS77E"
 
 
+# MAKES A GET REQUEST AND RETURNS A DICT/JSON
+
 def get_vid_data(vidID):
     request = service.commentThreads().list(
         part="snippet, replies",
@@ -14,14 +16,33 @@ def get_vid_data(vidID):
     response = request.execute()
     new_dict = json.dumps(response, indent=2)
     json_object = json.loads(new_dict)
+
+    # GENERATES JSON WITH WHOLE DATA FOR A BETTER OVERVIEW
+
+    with open("whole_data.json", "w") as outfile:
+        json.dump(json_object, outfile)
     return json_object
+
+# FILTERS RELEANT DATA OUT OF DICT AND RETURNS ARRAY WITH COMMENTS
 
 
 def filter_for_comments(json):
     comments = []
     for item in json['items']:
-        comments.append(item['id'])
+        commentID = item['id']
+        comment = item["snippet"]["topLevelComment"]["snippet"]["textOriginal"]
+        author = item["snippet"]["topLevelComment"]["snippet"]["authorDisplayName"]
+
+        comments.append({
+            commentID: {
+                'autor': author,
+                'comment': comment
+            }
+        })
+
     return comments
+
+# CREATES ENTRY AND EXPORTS IT TO FILE
 
 
 def create_entry(vidID):
@@ -32,5 +53,5 @@ def create_entry(vidID):
 
 print(create_entry(vidID))
 
-with open("sample.json", "w") as outfile:
-    json.dump(create_entry(vidID), outfile)
+with open("comments.json", "w") as outfile2:
+    json.dump(create_entry(vidID), outfile2)
