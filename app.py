@@ -5,8 +5,8 @@ app = Flask(__name__)
 
 @app.route('/', methods=["GET", "POST"])
 def index():
-  vid_url = request.form["vid_url"]
-
-  return render_template('index.html', url=vid_url)
-
-
+    if request.method == 'POST':
+        vid_url = request.form["vid_url"]
+        return render_template('index.html', vid_url=vid_url)
+    else:
+        return render_template('index.html')
