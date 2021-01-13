@@ -13,8 +13,8 @@ import sklearn
 import numpy as np
 import pandas as pd
 
-train = pd.read_csv("/content/train.csv")
-test = pd.read_csv("/content/test.csv")
+train = pd.read_csv("./train_data/train.csv")
+test = pd.read_csv("./train_data/test.csv")
 
 train.head(10)
 
@@ -27,7 +27,7 @@ sum(train["label"] == 1)
 #@title
 train.isnull().sum()
 
-!pip install tweet-preprocessor
+# pip install tweet-preprocessor
 
 import re
 
