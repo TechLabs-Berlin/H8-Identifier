@@ -6,7 +6,10 @@ name = "pypi"
 [packages]
 flask = "*"
 google-api-python-client = "*"
-
+sklearn = "*"
+pandas = "*"
+numpy = "*"
+tweet-preprocessor = "*"
 
 [dev-packages]
 
