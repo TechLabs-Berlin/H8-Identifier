@@ -112,7 +112,6 @@ def create_entry(vidID):
     return comments
 
 
-print(create_entry(vidID))
 
 with open("comments.json", "w") as outfile2:
     json.dump(create_entry(vidID), outfile2)
