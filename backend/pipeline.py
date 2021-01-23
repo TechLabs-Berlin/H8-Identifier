@@ -1,2 +1,2 @@
-from request import create_entry
-from classifier import return_classification
+def generate_output():
+    return "This is some output"

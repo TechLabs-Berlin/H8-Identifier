@@ -1,5 +1,5 @@
 from googleapiclient.discovery import build
-from myAPI import API_Key
+from .myAPI import API_Key
 import json
 
 service = build('youtube', 'v3', developerKey=API_Key)
@@ -110,7 +110,6 @@ def create_entry(vidID):
     json = get_vid_data(vidID)
     comments = filter_for_comments(json)
     return comments
-
 
 
 with open("comments.json", "w") as outfile2:
