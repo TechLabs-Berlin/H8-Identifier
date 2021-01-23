@@ -1,9 +1,18 @@
 from googleapiclient.discovery import build
-from .myAPI import API_Key
+from myAPI import API_Key
 import json
+import requests
 
 service = build('youtube', 'v3', developerKey=API_Key)
 vidID = "_1M1rhO5rXo"
+
+
+def get_vid_title(vidID):
+    data = requests.get(
+        f'https://www.googleapis.com/youtube/v3/videos?key={API_Key}&part=snippet&id={vidID}')
+    print(data.status_code)
+    clean_data = str(data.content).strip().replace('\n', '')
+    return clean_data
 
 
 # MAKES A GET REQUEST AND RETURNS A DICT/JSON
@@ -114,3 +123,6 @@ def create_entry(vidID):
 
 with open("comments.json", "w") as outfile2:
     json.dump(create_entry(vidID), outfile2)
+
+with open("video_data.json", "w") as outfile3:
+    outfile3.write(get_vid_title(vidID))
