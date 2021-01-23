@@ -18,3 +18,7 @@ def index():
 def result(id):
     result = generate_output(id)
     return render_template('result.html', output=result)
+
+@app.error('/error')
+def error():
+    render_template('error.html')
