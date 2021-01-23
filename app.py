@@ -9,7 +9,11 @@ def index():
     if request.method == 'POST':
         vid_url = request.form["vid_url"]
         id = get_id_from_url(vid_url)
-        return redirect(f'/result/{id}')
+
+        if id == -1:
+            return redirect('/error')
+        else:
+            return redirect(f'/result/{id}')
     else:
         return render_template('/index.html')
 
@@ -17,8 +21,9 @@ def index():
 @app.route('/result/<id>')
 def result(id):
     result = generate_output(id)
-    return render_template('result.html', output=result)
+    return render_template('result.html', id= id, output=result)
 
-@app.error('/error')
+
+@app.route('/error')
 def error():
-    render_template('error.html')
+    return render_template('error.html')
