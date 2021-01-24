@@ -1,14 +1,26 @@
 from googleapiclient.discovery import build
-from myAPI import API_Key
+from .myAPI import APIkey
 import json
+import requests
 
-service = build('youtube', 'v3', developerKey=API_Key)
+service = build('youtube', 'v3', developerKey=APIkey)
 vidID = "_1M1rhO5rXo"
+
+
+def get_vid_data(vidID):
+    data = requests.get(
+        f'https://www.googleapis.com/youtube/v3/videos?key={APIkey}&part=snippet&id={vidID}')
+    print(data.status_code, type(data.content))
+    data_bytes = data.content
+    data_json = data_bytes.decode('utf8').replace("'", '"')
+    print(data_json)
+
+    return data_json
 
 
 # MAKES A GET REQUEST AND RETURNS A DICT/JSON
 
-def get_vid_data(vidID):
+def get_comment_data(vidID):
     request = service.commentThreads().list(
         part="snippet, replies",
         videoId=vidID
@@ -107,12 +119,13 @@ def filter_for_comments(json):
 # CREATES ENTRY AND EXPORTS IT TO FILE
 
 def create_entry(vidID):
-    json = get_vid_data(vidID)
+    json = get_comment_data(vidID)
     comments = filter_for_comments(json)
     return comments
 
 
-print(create_entry(vidID))
-
 with open("comments.json", "w") as outfile2:
     json.dump(create_entry(vidID), outfile2)
+
+with open("video_data.json", "w") as outfile3:
+    outfile3.write(get_vid_data(vidID))
