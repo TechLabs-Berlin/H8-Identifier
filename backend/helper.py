@@ -17,14 +17,11 @@ def get_five_comments_from_video(id):
     comments = create_entry(id)
 
 
-def get_title_and_description(url):
-    id = get_id_from_url(url)
+def get_title_and_description(id):
     data = get_vid_data(id)
-    print(type(data))
-    title = data["items"][0]["snippet"]
+    title = data["items"][0]["snippet"]["title"]
+    description = data["items"][0]["snippet"]["description"]
 
-    print(title)
-    return title
+    print(title, description)
+    return title, description
 
-
-get_title_and_description("https://www.youtube.com/watch?v=solmfNYP9b4")

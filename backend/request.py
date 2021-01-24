@@ -14,7 +14,6 @@ def get_vid_data(vidID):
     data_bytes = data.content
     data_json = data_bytes.decode('utf8')
     json_object = json.loads(data_json)
-    print("json_object", type(json_object))
 
     return json_object
 

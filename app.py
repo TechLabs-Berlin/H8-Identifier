@@ -1,8 +1,7 @@
 from flask import Flask, render_template, request, redirect
-from backend import get_id_from_url, get_vid_data
+from backend import get_id_from_url, get_vid_data, generate_output, get_title_and_description
 
 app = Flask(__name__)
-
 
 
 @app.route('/', methods=["GET", "POST"])
@@ -22,7 +21,8 @@ def index():
 @app.route('/result/<id>')
 def result(id):
     result = generate_output(id)
-    return render_template('result.html', id=id, output=result)
+    title, description = get_title_and_description(id)
+    return render_template('result.html', id=id, title=title, description=description)
 
 
 @app.route('/error')
