@@ -1,11 +1,14 @@
 # url_to_hate.py
 This project defines the function get_prediction(url)
+
 Input: 
 - youtube url
+
 Output: 
 - y_pred_svm is a list consisting of 1 for hate and 0 for non-hate
 - hateful_comments is a list consisting of all comments (tweet) which are labeled as hate (1)
 - sum(y_pred_svm)/len(y_pred_svm) is the ratio of hateful comments within all checked comments.
+
 Comments:
 - the classifier works for English comments. Comments in other languages might be predicted as hate although they are not hateful.
 - it is a modification of the request.py and can run independently from it, however request.py is still needed for troubleshooting, see below.
@@ -59,8 +62,10 @@ def filter_for_comments(json):
 
 # Anwendung.py takes a dataset as input applies the classifier 
 This project defines the function predict(test), which applies the trained classifier (model.pkl and vectorizer.pkl) to a data called test.
+
 Input: 
 - numpy array or a list with a column label *tweet* containing all youtube comments as input.
+
 Process:
 - the data is then transformed into a pandas dataframe
 - the tweet column is cleaned from noise
@@ -72,7 +77,6 @@ Output:
 - hateful_comments is a list consisting of all comments (tweet) which are labeled as hate (1)
 - sum(y_pred_svm)/len(y_pred_svm) is the ratio of hateful comments within all checked comments.
 
-It converts the data to 
 # Twitter classifier model (twitter_classifier.py)
 
 This project classifies tweets, via supervised learning. We load the tweets from the train_data directory.
