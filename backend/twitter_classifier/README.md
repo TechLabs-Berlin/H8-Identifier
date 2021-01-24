@@ -1,4 +1,13 @@
-# url_to_hate.py
+# test.py 
+
+This is a file only contains get_prediction from url_to_hate.py to test the pipeline.
+Just change the url and you will receive hate comments. You might choose rather controversial youtube videos for test.
+
+Issue:
+- As for now you need to be in cd /H8-Identifier/backend/twitter_classifier to run test.py
+- If you can fix the bug so that you can run it also from main directory, please update - thanks a lot
+
+# url_to_hate.py takes a youtube url and generates predictions
 This project defines the function get_prediction(url)
 
 Input: 
@@ -14,52 +23,9 @@ Comments:
 - it is a modification of the request.py and can run independently from it, however request.py is still needed for troubleshooting, see below.
 - myAPI.py needs to be in the same folder as this file.
 
-Issue:
-- only 20 comments are fetched from the url. The bug is most likely in one of the 2 functions: *get_vid_data()* or *filter_for_comments()* 
-  - another possibility: maybe the free Youtube API only allows us fetch 20 comments? thus the functions are fine.
-```python
-# MAKES A GET REQUEST AND RETURNS A DICT/JSON
-
-def get_vid_data(vidID):
-    request = service.commentThreads().list(
-        part="snippet, replies",
-        videoId=vidID
-    )
-    response = request.execute()
-    new_dict = json.dumps(response, indent=2)
-    json_object = json.loads(new_dict)
-    return json_object
-
-# FILTERS ONLY Comment texts OUT OF DICT AND RETURNS comments as tweet
-
-def filter_for_comments(json):
-    # CREATE EMPTY DICT
-    count = 0
-    tweet = ""
-    data = []
-    # ITERATE OVER COMMENTS
-    for item in json['items']:
-        count = count +1
-        # GET RELEVANT DATA
-        tweet = item["snippet"]["topLevelComment"]["snippet"]["textOriginal"]
-    # FILL IN THE OUTPUT DICT
-        data.append({
-            'id': count,
-            'tweet': tweet
-        })
-        # IF THERE ARE REPLIES ADD THESE TO THE EXPORT DATA
-        if "replies" in item:
-            for reply in item["replies"]["comments"]:
-                # REPLY COMMENTS HAVE ADDITIONAL KEYS reply_no & parent_comment
-                count = count + 1
-                tweet = reply["snippet"]["textOriginal"]
-                data.append({
-                    'id': count,
-                    'tweet': tweet
-                })     
-    return data
-```
-
+Attention:
+- Our Youtube API *https://developers.google.com/youtube/v3/docs/commentThreads/list* only has a maximum of 100 Results
+- only 100 comments are fetched from the youtube url
 # Anwendung.py takes a dataset as input applies the classifier 
 This project defines the function predict(test), which applies the trained classifier (model.pkl and vectorizer.pkl) to a data called test.
 
@@ -69,7 +35,7 @@ Input:
 Process:
 - the data is then transformed into a pandas dataframe
 - the tweet column is cleaned from noise
-- the vectorizer.pkl is transforming the data for the model (a Support Vector Classificationhttps://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html)
+- the vectorizer.pkl is transforming the data for the model (a Support Vector Classification https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html)
 - the model is applied and generates output
   
 Output: 
@@ -77,7 +43,7 @@ Output:
 - hateful_comments is a list consisting of all comments (tweet) which are labeled as hate (1)
 - sum(y_pred_svm)/len(y_pred_svm) is the ratio of hateful comments within all checked comments.
 
-# Twitter classifier model (twitter_classifier.py)
+# Twitter classifier model twitter_classifier.py
 
 This project classifies tweets, via supervised learning. We load the tweets from the train_data directory.
 

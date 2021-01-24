@@ -1,10 +1,11 @@
 from googleapiclient.discovery import build
-from myAPI import API_Key
+from myAPI import APIKey
 import pandas as pd
 import json
 from Anwendung import predict
+import requests
 
-service = build('youtube', 'v3', developerKey=API_Key)
+service = build('youtube', 'v3', developerKey=APIKey)
 # get vid id from URL-string
 
 def get_id_from_url(url):
@@ -20,12 +21,35 @@ def get_id_from_url(url):
 def get_vid_data(vidID):
     request = service.commentThreads().list(
         part="snippet, replies",
-        videoId=vidID
+        videoId=vidID,
+        maxResults=100
     )
     response = request.execute()
     new_dict = json.dumps(response, indent=2)
     json_object = json.loads(new_dict)
     return json_object
+# def get_vid_data(vidID):
+#     data = requests.get(
+#         f'https://www.googleapis.com/youtube/v3/videos?key={APIkey}&part=snippet&id={vidID}')
+#     print(data.status_code)
+#     data_bytes = data.content
+#     data_json = data_bytes.decode('utf8')
+#     json_object = json.loads(data_json)
+
+#     return json_object
+
+
+# # MAKES A GET REQUEST AND RETURNS A DICT/JSON
+
+# def get_comment_data(vidID):
+#     request = service.commentThreads().list(
+#         part="snippet, replies",
+#         videoId=vidID
+#     )
+#     response = request.execute()
+#     new_dict = json.dumps(response, indent=2)
+#     json_object = json.loads(new_dict)
+
 
 # FILTERS ONLY Comment texts OUT OF DICT AND RETURNS comments as tweet
 
