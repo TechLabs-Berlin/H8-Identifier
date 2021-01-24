@@ -8,6 +8,9 @@ sklearn = "*"
 numpy = "*"
 pandas = "*"
 tweet-preprocessor = "*"
+objectpath = "*"
+google-api-python-client = "*"
+
 
 [dev-packages]
 

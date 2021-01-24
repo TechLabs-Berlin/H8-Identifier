@@ -3,8 +3,7 @@ from myAPI import API_Key
 import json
 
 service = build('youtube', 'v3', developerKey=API_Key)
-vidID = "_1M1rhO5rXo"
-
+vidID = "DgTG2Qg-x0k"
 
 # MAKES A GET REQUEST AND RETURNS A DICT/JSON
 
@@ -110,6 +109,9 @@ def create_entry(vidID):
     json = get_vid_data(vidID)
     comments = filter_for_comments(json)
     return comments
+
+def only_text(vidID):
+    comments = create_entry(vidID)
 
 
 print(create_entry(vidID))
