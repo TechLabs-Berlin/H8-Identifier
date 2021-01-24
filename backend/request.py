@@ -10,9 +10,14 @@ vidID = "_1M1rhO5rXo"
 def get_vid_title(vidID):
     data = requests.get(
         f'https://www.googleapis.com/youtube/v3/videos?key={API_Key}&part=snippet&id={vidID}')
-    print(data.status_code)
-    clean_data = str(data.content).strip().replace('\n', '')
-    return clean_data
+    print(data.status_code, type(data.content))
+    data_bytes = data.content
+    data_json = data_bytes.decode('utf8').replace("'", '"')
+    print(data_json)
+    """ clean_data = data_str.replace(
+        "/r", "").replace("/n", "").replace("/r", "").replace("/n", "") """
+
+    return data_json
 
 
 # MAKES A GET REQUEST AND RETURNS A DICT/JSON
