@@ -1,6 +1,6 @@
 # test.py 
 
-This is a file only contains get_prediction from url_to_hate.py to test the pipeline.
+This file only contains get_prediction from url_to_hate.py to test the pipeline.
 Just change the url and you will receive hate comments. You might choose rather controversial youtube videos for test.
 
 Issue:
