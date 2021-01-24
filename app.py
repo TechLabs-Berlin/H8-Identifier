@@ -4,6 +4,7 @@ from backend import generate_output, get_id_from_url
 app = Flask(__name__)
 
 
+
 @app.route('/', methods=["GET", "POST"])
 def index():
     if request.method == 'POST':
@@ -21,7 +22,7 @@ def index():
 @app.route('/result/<id>')
 def result(id):
     result = generate_output(id)
-    return render_template('result.html', id= id, output=result)
+    return render_template('result.html', id=id, output=result)
 
 
 @app.route('/error')

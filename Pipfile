@@ -11,6 +11,7 @@ pandas = "*"
 numpy = "*"
 tweet-preprocessor = "*"
 requests = "*"
+flask-session = "*"
 
 [dev-packages]
 
