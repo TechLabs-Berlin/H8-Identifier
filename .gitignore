@@ -1,9 +1,7 @@
 **/*.pyc
 myAPI.py
 .vscode
-
 /hostfiles
-myAPI.py
 whole_data.json
 comments.json
 video_data.json
