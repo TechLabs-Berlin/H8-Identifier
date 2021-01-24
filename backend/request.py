@@ -10,12 +10,13 @@ vidID = "_1M1rhO5rXo"
 def get_vid_data(vidID):
     data = requests.get(
         f'https://www.googleapis.com/youtube/v3/videos?key={APIkey}&part=snippet&id={vidID}')
-    print(data.status_code, type(data.content))
+    print(data.status_code)
     data_bytes = data.content
-    data_json = data_bytes.decode('utf8').replace("'", '"')
-    print(data_json)
+    data_json = data_bytes.decode('utf8')
+    json_object = json.loads(data_json)
+    print("json_object", type(json_object))
 
-    return data_json
+    return json_object
 
 
 # MAKES A GET REQUEST AND RETURNS A DICT/JSON
@@ -128,4 +129,6 @@ with open("comments.json", "w") as outfile2:
     json.dump(create_entry(vidID), outfile2)
 
 with open("video_data.json", "w") as outfile3:
-    outfile3.write(get_vid_data(vidID))
+    data = get_vid_data(vidID)
+    data_str = json.dumps(data, indent=2)
+    outfile3.write(data_str)

@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect
-from backend import generate_output, get_id_from_url
+from backend import get_id_from_url, get_vid_data
 
 app = Flask(__name__)
 
