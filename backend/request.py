@@ -23,7 +23,8 @@ def get_vid_data(vidID):
 def get_comment_data(vidID):
     request = service.commentThreads().list(
         part="snippet, replies",
-        videoId=vidID
+        videoId=vidID,
+        maxResults=100
     )
     response = request.execute()
     new_dict = json.dumps(response, indent=2)
@@ -112,7 +113,7 @@ def filter_for_comments(json):
                         'author_ID': author_ID
                     }
                     data["authorIDs"].append(author_ID)
-
+    print("len", len(data["commentIDs"]))
     return data
 
 
@@ -122,6 +123,7 @@ def create_entry(vidID):
     json = get_comment_data(vidID)
     comments = filter_for_comments(json)
     return comments
+
 
 def only_text(vidID):
     comments = create_entry(vidID)
