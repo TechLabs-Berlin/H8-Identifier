@@ -4,14 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-flask = "*"
-google-api-python-client = "*"
-sklearn = "*"
-pandas = "*"
-numpy = "*"
-tweet-preprocessor = "*"
 requests = "*"
-flask-session = "*"
 
 [dev-packages]
 
