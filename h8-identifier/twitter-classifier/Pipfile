@@ -4,8 +4,13 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-requests = "*"
-h8-identifier = {editable = true, path = "."}
+sklearn = "*"
+numpy = "*"
+pandas = "*"
+tweet-preprocessor = "*"
+objectpath = "*"
+google-api-python-client = "*"
+
 
 [dev-packages]
 
