@@ -35,8 +35,8 @@ def clean_tweets(df):
     tempArr.append(tmpL)
   return tempArr
 
-def predict(test):
-  test = pd.DataFrame(test)
+def predict(df):
+  test = pd.DataFrame(df)
   print(type(test))
   print(test)
   bla = test.copy()
