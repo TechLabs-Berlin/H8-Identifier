@@ -1,4 +1,4 @@
-from .request import get_vid_data, create_entry
+from .yt_request import get_vid_data, create_entry
 import random
 
 # get vid id from URL-string

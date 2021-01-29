@@ -40,9 +40,32 @@ def create_app(test_config=None):
     @app.route('/result/<id>')
     def result(id):
         result = generate_output(id)
-        title, description = get_title_and_description(id)
-        return render_template('result.html', id=id, title=title, description=description, result=result)
+
+        title = result["title"]
+        description = result["description"]
+        chanel_title = result["chanel_title"]
+        number_of_comments = result["number_of_comments"]
+        percent_hate = result["percent_hate"]
+        views = result["views"]
+        shared = result["shared"]
+        comments = result["comments"]
+
+        comments_per_view = (number_of_comments/views)
+
+        return render_template('result.html',
+                               id=id,
+                               title=title,
+                               description=description,
+                               chanel_title=chanel_title,
+                               number_of_comments=number_of_comments,
+                               percent_hate=percent_hate,
+                               views=views,
+                               shared=shared,
+                               comments=comments,
+                               comments_per_view=comments_per_view)
 
     @app.route('/error')
     def error():
         return render_template('error.html')
+
+    return app
