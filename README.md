@@ -32,6 +32,7 @@ Further details on the script, the classifier and the training data set can be f
 - Thuy Anh Nguyen
 - Maiuran	
 - Robin van de Water
+
 We thank our mentor Felix Linker who kept us motivated and gave us guidance and input whenever needed. 
 Thank you Wahid for your input.
 
