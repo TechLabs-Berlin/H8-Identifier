@@ -60,5 +60,10 @@ def predict(df):
   for i, value in enumerate(y_pred_svm):
     if value == 1:
       hateful_comments.append(bla.iloc[i])
+  
+  count_hate = sum(y_pred_svm)
+  count_comments = len(y_pred_svm)
+  hate_ratio = count_hate/count_comments
+  first_hate = hateful_comments[:10]
 
-  return [y_pred_svm, hateful_comments, sum(y_pred_svm)/len(y_pred_svm)]
+  return [first_hate, count_hate, count_comments, hate_ratio]

@@ -1,23 +1,48 @@
+# UPDATE 30.01.2021
+
+Achievements:
+
+- get_prediction(vidID) takes a video ID. You have to replace vidID = get_id_from_url(url) in order to directly input a youtube url
+- you can test any youtube url using test.py which has this line of code
+```python
+from url_to_hate import get_prediction, get_id_from_url
+
+print(get_prediction(get_id_from_url("https://www.youtube.com/watch?v=6eGEX_LTqhQ")))
+```
+- get_prediction now fetches all comments instead of just 100
+- Because it gives you tons of hate comments, I modified the output (Update of predict(df) from Anwendung.py ) as follows 
+  - list in this order [first_hate, count_hate, count_comments, hate_ratio]
+  - count_hate: Total amount of hate comments= sum(y_pred_svm)
+  - count_comments: Total amount of comments and subcomments
+  - hate_ratio = count_hate/count_comments 
+  - first_hate: First 10 hate comments
+
+More information below
 # test.py 
 
-This file only contains get_prediction from url_to_hate.py to test the pipeline.
+This file only contains get_id_from_url and get_prediction from url_to_hate.py to test the pipeline.
 Just change the url and you will receive hate comments. You might choose rather controversial youtube videos for test.
 
 Issue:
 - As for now you need to be in cd /H8-Identifier/backend/twitter_classifier to run test.py
+- Update 30.01.2021: __init__.py is in that directory however still following error
+  - FileNotFoundError: [Errno 2] No such file or directory: 'vectorizer.pkl'
 - If you can fix the bug so that you can run it also from main directory, please update - thanks a lot
 
 # url_to_hate.py takes a youtube url and generates predictions
-This project defines the function get_prediction(url)
+This project defines the function get_prediction(vidID)
 
 Input: 
-- youtube url
+- youtube video ID
 
-Output: 
-- y_pred_svm is a list consisting of 1 for hate and 0 for non-hate
-- hateful_comments is a list consisting of all comments (tweet) which are labeled as hate (1)
-- sum(y_pred_svm)/len(y_pred_svm) is the ratio of hateful comments within all checked comments.
-
+Output:
+ 
+- list in this order [first_hate, count_hate, count_comments, hate_ratio]
+- count_hate: Total amount of hate comments= sum(y_pred_svm)
+- count_comments: Total amount of comments and subcomments
+- hate_ratio = count_hate/count_comments 
+- first_hate: First 10 hate comments
+  
 Comments:
 - the classifier works for English comments. Comments in other languages might be predicted as hate although they are not hateful.
 - it is a modification of the request.py and can run independently from it, however request.py is still needed for troubleshooting, see below.
@@ -25,9 +50,9 @@ Comments:
 
 Attention:
 - Our Youtube API *https://developers.google.com/youtube/v3/docs/commentThreads/list* only has a maximum of 100 Results
-- only 100 comments are fetched from the youtube url
+- Bug fixed on 30.1.2021: implemented paging, now all comments are fetched from the youtube url
 # Anwendung.py takes a dataset as input applies the classifier 
-This project defines the function predict(test), which applies the trained classifier (model.pkl and vectorizer.pkl) to a data called test.
+This project defines the function predict(df), which applies the trained classifier (model.pkl and vectorizer.pkl) to a data called test.
 
 Input: 
 - numpy array or a list with a column label *tweet* containing all youtube comments as input.
@@ -37,11 +62,20 @@ Process:
 - the tweet column is cleaned from noise
 - the vectorizer.pkl is transforming the data for the model (a Support Vector Classification https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html)
 - the model is applied and generates output
-  
-Output: 
+- get_prediction now fetches all comments instead of just 100
+- Because it gives you tons of hate comments, I modified the output (Update of predict(df) from Anwendung.py )
+
+Output:
+
+  - list in this order [first_hate, count_hate, count_comments, hate_ratio]
+  - count_hate: Total amount of hate comments= sum(y_pred_svm)
+  - count_comments: Total amount of comments and subcomments
+  - hate_ratio = count_hate/count_comments 
+  - first_hate: First 10 hate comments
+
+If you want to analyze the predictions on your own, please take these variables from predict(df).
 - y_pred_svm is a list consisting of 1 for hate and 0 for non-hate
 - hateful_comments is a list consisting of all comments (tweet) which are labeled as hate (1)
-- sum(y_pred_svm)/len(y_pred_svm) is the ratio of hateful comments within all checked comments.
 
 # Twitter classifier model twitter_classifier.py
 
