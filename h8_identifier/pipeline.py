@@ -1,13 +1,16 @@
 import random
 from .helper import get_title_and_description, get_five_random_comments
+from .twitter_classifier.url_to_hate import get_prediction
 
 
 def generate_output(id):
 
     title, description, chanel_title = get_title_and_description(id)
     comments = get_five_random_comments(id)
+    total, comments, percentage = get_prediction(id)
+    print(total)
 
-    dummy_dict = {
+    data_dict = {
         "title": title,
         "description": description,
         "chanel_title": chanel_title,
@@ -17,9 +20,9 @@ def generate_output(id):
         "shared": random.randint(1, 100001),
         "comments": comments
     }
-    return dummy_dict
+    return data_dict
 
 
-""" dummy_data = generate_output("q0MEeBzG1yw") """
+
 
 
