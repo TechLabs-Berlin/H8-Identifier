@@ -5,7 +5,6 @@ name = "pypi"
 
 [packages]
 requests = "*"
-h8-identifier = {path = "."}
 google-api-python-client = "*"
 sklearn = "*"
 pandas = "*"

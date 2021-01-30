@@ -1,11 +1,11 @@
 from googleapiclient.discovery import build
-from h8_identifier.twitter_classifier.myAPI import APIKey
+from ..myAPI import APIkey
 import pandas as pd
 import json
 from .Anwendung import predict
 import requests
 
-service = build('youtube', 'v3', developerKey=APIKey)
+service = build('youtube', 'v3', developerKey=APIkey)
 # get vid id from URL-string
 
 def get_id_from_url(url):
