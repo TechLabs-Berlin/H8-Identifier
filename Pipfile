@@ -4,14 +4,9 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-flask = "*"
-google-api-python-client = "*"
-sklearn = "*"
-pandas = "*"
-numpy = "*"
-tweet-preprocessor = "*"
 requests = "*"
-flask-session = "*"
+h8-identifier = {editable = true, path = "."}
+google-api-python-client = "*"
 
 [dev-packages]
 

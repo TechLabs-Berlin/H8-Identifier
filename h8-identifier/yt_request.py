@@ -64,7 +64,7 @@ def filter_for_comments(json):
         # FILL IN THE OUTPUT DICT
         data["comments_by_ID"][commentID] = {
             'author_ID': author_ID,
-            'commetn_txt': comment_txt,
+            'comment_txt': comment_txt,
             'timestamp': timestamp,
             'top_level': top_level,
             'videoID': videoID
@@ -97,7 +97,7 @@ def filter_for_comments(json):
 
                 data["comments_by_ID"][commentID] = {
                     'author_ID': author_ID,
-                    'commetn_txt': comment_txt,
+                    'comment_txt': comment_txt,
                     'timestamp': timestamp,
                     'top_level': top_level,
                     'videoID': videoID,
@@ -113,7 +113,10 @@ def filter_for_comments(json):
                         'author_ID': author_ID
                     }
                     data["authorIDs"].append(author_ID)
+<<<<<<< HEAD:backend/request.py
     print("len", len(data["commentIDs"]))
+=======
+>>>>>>> urs:h8-identifier/yt_request.py
     return data
 
 
@@ -124,10 +127,13 @@ def create_entry(vidID):
     comments = filter_for_comments(json)
     return comments
 
+<<<<<<< HEAD:backend/request.py
 
 def only_text(vidID):
     comments = create_entry(vidID)
 
+=======
+>>>>>>> urs:h8-identifier/yt_request.py
 
 with open("comments.json", "w") as outfile2:
     json.dump(create_entry(vidID), outfile2)
