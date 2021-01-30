@@ -5,6 +5,8 @@ Just change the url and you will receive hate comments. You might choose rather 
 
 Issue:
 - As for now you need to be in cd /H8-Identifier/backend/twitter_classifier to run test.py
+- Update 30.01.2021: __init__.py is in that directory however still following error
+  - FileNotFoundError: [Errno 2] No such file or directory: 'vectorizer.pkl'
 - If you can fix the bug so that you can run it also from main directory, please update - thanks a lot
 
 # url_to_hate.py takes a youtube url and generates predictions
@@ -25,7 +27,7 @@ Comments:
 
 Attention:
 - Our Youtube API *https://developers.google.com/youtube/v3/docs/commentThreads/list* only has a maximum of 100 Results
-- only 100 comments are fetched from the youtube url
+- Bug fixed on 30.1.2021: implemented paging, now all comments are fetched from the youtube url
 # Anwendung.py takes a dataset as input applies the classifier 
 This project defines the function predict(test), which applies the trained classifier (model.pkl and vectorizer.pkl) to a data called test.
 
