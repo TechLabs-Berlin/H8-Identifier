@@ -1,11 +1,14 @@
 import random
 from .helper import get_title_and_description, get_five_random_comments
+from h8_identifier.twitter_classifier.Anwendung import get_prediction
 
 
 def generate_output(id):
 
     title, description, chanel_title = get_title_and_description(id)
     comments = get_five_random_comments(id)
+    total, comments, percentage = get_prediction(id)
+    print(total)
 
     data_dict = {
         "title": title,
@@ -20,6 +23,6 @@ def generate_output(id):
     return data_dict
 
 
-""" dummy_data = generate_output("q0MEeBzG1yw") """
+
 
 

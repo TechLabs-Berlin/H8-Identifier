@@ -1,5 +1,5 @@
 from googleapiclient.discovery import build
-from h8-identifier.myAPI import APIKey
+from h8_identifier.twitter_classifier.myAPI import APIKey
 import pandas as pd
 import json
 from .Anwendung import predict
