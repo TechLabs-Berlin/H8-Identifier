@@ -4,25 +4,23 @@ There should be no hateful comments on youtube. We wanted to train a classifier,
 
 # Backend
 ## The classifier
-url_to_hate.py takes a youtube url and generates predictions. This project defines the function *get_prediction(url)* which can be run on the server. Here more details: 
+This project defines the function *get_prediction(vidID)* which can be run on the server. Here more details: get_prediction(vidID) takes a video ID. You have to replace vidID = get_id_from_url(url) in order to directly input a youtube url
+- you can test any youtube url using test.py which has this line of code
+```python
+from url_to_hate import get_prediction, get_id_from_url
 
-Input: 
-- a youtube url
+print(get_prediction(get_id_from_url("your-youtube-url")))
+```
+- get_prediction now fetches all comments instead of just 100
+- Because it outputs tons of hate comments, I modified the output (Refer predict(df) from Anwendung.py)
 
-Output: 
-- y_pred_svm is a list consisting of 1 for hate and 0 for non-hate
-- hateful_comments is a list consisting of all comments (tweet) which are labeled as hate (1)
-- sum(y_pred_svm)/len(y_pred_svm) is the ratio of hateful comments within all checked comments.
+Output: list [first_hate, count_hate, count_comments, hate_ratio]
+  - count_hate: Total amount of hate comments= sum(y_pred_svm)
+  - count_comments: Total amount of comments and subcomments
+  - hate_ratio = count_hate/count_comments 
+  - first_hate: First 10 hate comments
 
-Comments:
-- the classifier works for English comments. Comments in other languages might be predicted as hate although they are not hateful.
-- it is a modification of the request.py and can run independently from it, however request.py is still needed for troubleshooting, see below.
-- myAPI.py needs to be in the same folder as this file.
-
-Attention:
-- only 100 comments are fetched from the youtube url due to a limitation of the Youtube API *https://developers.google.com/youtube/v3/docs/commentThreads/list*
-
-Further details on the script, the classifier and the training data set can be found in the README.md located in the respective directory backend/twitter-classifier
+Further details on the script, the classifier and the training data set can be found in the README.md located in the respective directory ./twitter-classifier
 
 # Frontend
 

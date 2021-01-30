@@ -35,11 +35,14 @@ This project defines the function get_prediction(vidID)
 Input: 
 - youtube video ID
 
-Output: 
-- y_pred_svm is a list consisting of 1 for hate and 0 for non-hate
-- hateful_comments is a list consisting of all comments (tweet) which are labeled as hate (1)
-- sum(y_pred_svm)/len(y_pred_svm) is the ratio of hateful comments within all checked comments.
-
+Output:
+ 
+- list in this order [first_hate, count_hate, count_comments, hate_ratio]
+- count_hate: Total amount of hate comments= sum(y_pred_svm)
+- count_comments: Total amount of comments and subcomments
+- hate_ratio = count_hate/count_comments 
+- first_hate: First 10 hate comments
+  
 Comments:
 - the classifier works for English comments. Comments in other languages might be predicted as hate although they are not hateful.
 - it is a modification of the request.py and can run independently from it, however request.py is still needed for troubleshooting, see below.
@@ -59,10 +62,11 @@ Process:
 - the tweet column is cleaned from noise
 - the vectorizer.pkl is transforming the data for the model (a Support Vector Classification https://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html)
 - the model is applied and generates output
-  
-Output: 
 - get_prediction now fetches all comments instead of just 100
-- Because it gives you tons of hate comments, I modified the output (Update of predict(df) from Anwendung.py ) as follows 
+- Because it gives you tons of hate comments, I modified the output (Update of predict(df) from Anwendung.py )
+
+Output:
+
   - list in this order [first_hate, count_hate, count_comments, hate_ratio]
   - count_hate: Total amount of hate comments= sum(y_pred_svm)
   - count_comments: Total amount of comments and subcomments
