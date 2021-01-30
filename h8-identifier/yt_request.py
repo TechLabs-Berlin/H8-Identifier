@@ -64,7 +64,7 @@ def filter_for_comments(json):
         # FILL IN THE OUTPUT DICT
         data["comments_by_ID"][commentID] = {
             'author_ID': author_ID,
-            'commetn_txt': comment_txt,
+            'comment_txt': comment_txt,
             'timestamp': timestamp,
             'top_level': top_level,
             'videoID': videoID
@@ -97,7 +97,7 @@ def filter_for_comments(json):
 
                 data["comments_by_ID"][commentID] = {
                     'author_ID': author_ID,
-                    'commetn_txt': comment_txt,
+                    'comment_txt': comment_txt,
                     'timestamp': timestamp,
                     'top_level': top_level,
                     'videoID': videoID,

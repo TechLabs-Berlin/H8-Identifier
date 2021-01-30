@@ -42,7 +42,7 @@ def create_app(test_config=None):
         result = generate_output(id)
 
         title = result["title"]
-        description = result["description"]
+        description = result["description"][0:200]
         chanel_title = result["chanel_title"]
         number_of_comments = result["number_of_comments"]
         percent_hate = result["percent_hate"]

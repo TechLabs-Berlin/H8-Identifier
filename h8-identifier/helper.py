@@ -20,8 +20,8 @@ def get_five_random_comments(id):
     amount_of_comments = len(comments["commentIDs"])
 
     for i in range(5):
-        rand_comment_id = comments["commentIDs"][random.randint(
-            1, amount_of_comments+1)]
+        comment_index = random.randint(1, amount_of_comments+1)
+        rand_comment_id = comments["commentIDs"][comment_index]
         rand_comments.append(comments["comments_by_ID"][rand_comment_id])
 
     return rand_comments
