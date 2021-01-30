@@ -1,6 +1,6 @@
 import random
 from .helper import get_title_and_description, get_five_random_comments
-from h8_identifier.twitter_classifier.Anwendung import get_prediction
+from .twitter_classifier.url_to_hate import get_prediction
 
 
 def generate_output(id):

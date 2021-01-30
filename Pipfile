@@ -8,6 +8,8 @@ requests = "*"
 h8-identifier = {path = "."}
 google-api-python-client = "*"
 sklearn = "*"
+pandas = "*"
+tweet-preprocessor = "*"
 
 [dev-packages]
 
