@@ -2,14 +2,40 @@
 
 {% block body %}
 
-<h1>Check your content</h1>
-<form action="/" method="POST">
-  <p>
-    <label for="vid-url">URL:</label>
-    <input type="text" name="vid_url" />
-  </p>
-  <p><input type="submit" name="submit_url" value="Send URL" /></p>
-</form>
+<div class="col-xs-12" style="height:250px;"></div>
+<main role="main" class="d-flex justify-content-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 center"></div>
+            <div class="col-md-8 center">
+                <img src="H8 Speech Dector Logo.png" class="rounded mx-auto d-block" alt="H8 Detect" height=250px>
+                <h1 class="text-center">Check your Youtube Content</h1>
+            </div>
+            <div class="col-md-2 center"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-1 center"></div>
+            <div class="col-md-10 center">
+                <form action="/" method="POST">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control input-lg" id="exampleFormControlInput1"
+                            placeholder="Youtube adress here">
 
-<p>{{vid_url}}</p>
+                        <div class="input-group-append">
+                            <input class="btn btn-primary mb-2" type="submit" value="Generate Report"
+                                name="submit_url"></input>
+                        </div>
+                    </div>
+                </form>
+                <p class="lead">We check your youtube videos for hateful content and deem if it is appropriate to
+                    watch for
+                    children. Just enter any Youtube adress here and let us generate our reports. Enter the URL of
+                    the Youtube video or,
+                    if you don’t know the URL, we search for it on the Youtube website.
+                </p>
+            </div>
+            <div class="col-md-1 center"></div>
+        </div>
+    </div>
+</main>
 {% endblock %}

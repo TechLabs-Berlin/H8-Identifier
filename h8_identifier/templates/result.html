@@ -2,39 +2,79 @@
 
 {% block body %}
 
-<h1>H8-Identifier</h1>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/{{id}}" frameborder="0"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-  allowfullscreen></iframe>
-<h2>{{title}}</h2>
-<p class="vid-description">{{description}}...</p>
-<p>{{chanel_title}}</p>
-
-
-<div class="infobox">
-  <div class="icons">
-    <p>Comments: {{number_of_comments}}</p>
-    <p>Hate Content: {{percent_hate}}</p>
-    <p>Views: {{views}}</p>
-    <p>Shared: {{shared}}</p>
-  </div>
-  <p class="vid-analysis">This video has <span class="highlight">{{ number_of_comments }}</span> comments. It has <span
-      class="highlight">{{
-      views }}</span> views which means that <span class="highlight">{{ comments_per_view }} out of 100</span>
-    viewers has left a comment It is regarded as hateful because <span class="highlight">{{ percent_hate }}%</span> of
-    the comments are hateful, discriminatory or racist according to our algorithm. The video has been shared <span
-      class="highlight">{{ shared }}</span> times</p>
-</div>
-
-<div class="comment-section">
-  <ul>
-    {%for comment in comments%}
-    <li>
-      <p>{{comment.timestamp}}</p>
-      <p>{{comment.comment_txt}}</p>
-    </li>
-    {%endfor%}
-  </ul>
-</div>
+<div class="col-xs-12" style="height:200px;"></div>
+<main role="main" class="d-flex justify-content-center">
+  <div class="starter-template">
+    <div class="container">
+      <div class="row ">
+        <div class="col-md-2 center"></div>
+        <div class="col-md-8 center">
+          <h1>{{title}}</h1>
+          <div class="embed-responsive embed-responsive-16by9">
+            <iframe src="https://www.youtube.com/embed/{{id}}" frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen></iframe>
+          </div>
+          <h2>{{chanel_title}}</h2>
+          <p class="vid-description">{{description}}...</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-2 center"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-1">
+          <i class="bi bi-chat" style="font-size: 2.5rem"></i>
+        </div>
+        <div class="col-sm-2 mx-auto">
+          <span class="align-bottom">{{number_of_comments}}</span>
+        </div>
+        <div class="col-sm-1">
+          <i class="bi bi-exclamation" style="font-size: 2.5rem"></i>
+        </div>
+        <div class="col-sm-2">
+          <p>{{percent_hate}}</p>
+        </div>
+        <div class="col-sm-1">
+          <i class="bi bi-eye" style="font-size: 2.5rem"></i>
+        </div>
+        <div class="col-sm-2">
+          <p>Views: {{views}}</p>
+        </div>
+        <div class="col-sm-1">
+          <i class="bi bi-share" style="font-size: 2.5rem"></i>
+        </div>
+        <div class="col-sm-2">
+          <p>{{shared}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <p>This video has {{ number_of_comments }}comments. It has {{
+          views }} views which means that {{ comments_per_view }} out of 100
+          viewers has left a comment It is regarded as hateful because { percent_hate }}% of
+          the comments are hateful, discriminatory or racist according to our algorithm. The video has been shared {{
+          shared }} times</p>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-2 center"></div>
+        <div class="col-md-8 center">
+          <div class="comment-section">
+            <ul>
+              {%for comment in comments%}
+              <li>
+                <p>{{comment.timestamp}}</p>
+                <p>{{comment.comment_txt}}</p>
+              </li>
+              {%endfor%}
+            </ul>
+          </div>
+          <div class="col-md-2 center"></div>
+        </div>
+      </div>
+</main>
 
 {% endblock %}
