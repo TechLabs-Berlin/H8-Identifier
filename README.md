@@ -20,10 +20,10 @@ Input:
 
 Output:
  
-- list in this order [first_hate, count_hate, count_comments, hate_ratio]
+- list in this order [first_hate, count_hate, count_comments, percentage]
 - count_hate: Total amount of hate comments= sum(y_pred_svm)
 - count_comments: Total amount of comments and subcomments
-- hate_ratio = count_hate/count_comments 
+- percentage: gives hate_ratio = count_hate/count_comments as a percentage, it is a string
 - first_hate: First hate comments
   
 Comments:

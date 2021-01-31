@@ -11,10 +11,10 @@ print(get_prediction(get_id_from_url("https://www.youtube.com/watch?v=6eGEX_LTqh
 ```
 - get_prediction now fetches all comments instead of just 100
 - Because it gives you tons of hate comments, I modified the output (Update of predict(df) from Anwendung.py ) as follows 
-  - list in this order [first_hate, count_hate, count_comments, hate_ratio]
+  - list in this order [first_hate, count_hate, count_comments, percentage]
   - count_hate: Total amount of hate comments= sum(y_pred_svm)
   - count_comments: Total amount of comments and subcomments
-  - hate_ratio = count_hate/count_comments 
+  - percentage: gives hate_ratio = count_hate/count_comments as a percentage, it is a string
   - first_hate: First 10 hate comments
 
 More information below

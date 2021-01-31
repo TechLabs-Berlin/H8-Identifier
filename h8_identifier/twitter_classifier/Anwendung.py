@@ -37,8 +37,6 @@ def clean_tweets(df):
 
 def predict(df, hate=10):
   test = pd.DataFrame(df)
-  print(type(test))
-  print(test)
   bla = test.copy()
 
   test_tweet = clean_tweets(test["tweet"])
@@ -46,12 +44,12 @@ def predict(df, hate=10):
   test["clean_tweet"] = test_tweet
 
 
-  with open('vectorizer.pkl', 'rb') as f:
+  with open('h8_identifier/twitter_classifier/vectorizer.pkl', 'rb') as f:
       vectorizer = pickle.load(f)
 
   x_test_vec = vectorizer.transform(test_tweet)
 
-  with open('model.pkl', 'rb') as f:
+  with open('h8_identifier/twitter_classifier/model.pkl', 'rb') as f:
       svm = pickle.load(f)
   y_pred_svm = svm.predict(x_test_vec)
 
@@ -64,6 +62,7 @@ def predict(df, hate=10):
   count_hate = sum(y_pred_svm)
   count_comments = len(y_pred_svm)
   hate_ratio = count_hate/count_comments
+  percentage = "{:.0%}".format(hate_ratio)
   first_hate = hateful_comments[:hate]
 
-  return [first_hate, count_hate, count_comments, hate_ratio]
+  return [first_hate, count_hate, count_comments, percentage]
