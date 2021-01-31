@@ -30,10 +30,11 @@ Issue:
 - If you can fix the bug so that you can run it also from main directory, please update - thanks a lot
 
 # url_to_hate.py takes a youtube url and generates predictions
-This project defines the function get_prediction(vidID)
+This project defines the function get_prediction(vidID, hate=10)
 
 Input: 
 - youtube video ID
+- hate = integer, how many hate comments it should display, by default it is 10
 
 Output:
  

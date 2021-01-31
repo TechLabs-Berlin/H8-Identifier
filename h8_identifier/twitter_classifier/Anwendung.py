@@ -35,7 +35,7 @@ def clean_tweets(df):
     tempArr.append(tmpL)
   return tempArr
 
-def predict(df):
+def predict(df, hate=10):
   test = pd.DataFrame(df)
   print(type(test))
   print(test)
@@ -64,6 +64,6 @@ def predict(df):
   count_hate = sum(y_pred_svm)
   count_comments = len(y_pred_svm)
   hate_ratio = count_hate/count_comments
-  first_hate = hateful_comments[:10]
+  first_hate = hateful_comments[:hate]
 
   return [first_hate, count_hate, count_comments, hate_ratio]
