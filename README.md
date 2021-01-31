@@ -11,7 +11,7 @@ from url_to_hate import get_prediction, get_id_from_url
 
 print(get_prediction(get_id_from_url("your-youtube-url")))
 ```
-# url_to_hate.py takes a youtube url and generates predictions
+# url_to_hate.py takes a youtube videoID and generates predictions
 This project defines the function get_prediction(vidID, hate=10)
 
 Input: 

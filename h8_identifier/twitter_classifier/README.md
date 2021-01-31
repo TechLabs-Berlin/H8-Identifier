@@ -29,7 +29,7 @@ Issue:
   - FileNotFoundError: [Errno 2] No such file or directory: 'vectorizer.pkl'
 - If you can fix the bug so that you can run it also from main directory, please update - thanks a lot
 
-# url_to_hate.py takes a youtube url and generates predictions
+# url_to_hate.py takes a youtube video ID and generates predictions
 This project defines the function get_prediction(vidID, hate=10)
 
 Input: 
