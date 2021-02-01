@@ -1,4 +1,5 @@
 from googleapiclient.discovery import build
+from .twitter_classifier.url_to_hate import filter_for_comments
 from .myAPI import APIkey
 import json
 import requests
@@ -39,82 +40,82 @@ def get_comment_data(vidID):
 
 # FILTERS RELEANT DATA OUT OF DICT AND RETURNS NEW DICT
 
-def filter_for_comments(json):
-    videoID = json["items"][0]["snippet"]["videoId"]
+# def filter_for_comments(json):
+#     videoID = json["items"][0]["snippet"]["videoId"]
 
-    # CREATE EMPTY DICT
-    data = {
-        "comments_by_ID": {},
-        "commentIDs": [],
-        "authors_by_ID": {},
-        "authorIDs": []
-    }
+#     # CREATE EMPTY DICT
+#     data = {
+#         "comments_by_ID": {},
+#         "commentIDs": [],
+#         "authors_by_ID": {},
+#         "authorIDs": []
+#     }
 
-    # ITERATE OVER COMMENTS
-    for item in json['items']:
+#     # ITERATE OVER COMMENTS
+#     for item in json['items']:
 
-        # GET RELEVANT DATA
-        commentID = item['id']
-        comment_txt = item["snippet"]["topLevelComment"]["snippet"]["textOriginal"]
-        author_name = item["snippet"]["topLevelComment"]["snippet"]["authorDisplayName"]
-        author_ID = item["snippet"]["topLevelComment"]["snippet"]["authorChannelId"]["value"]
-        timestamp = item["snippet"]["topLevelComment"]["snippet"]["updatedAt"]
-        top_level = True
+#         # GET RELEVANT DATA
+#         commentID = item['id']
+#         comment_txt = item["snippet"]["topLevelComment"]["snippet"]["textOriginal"]
+#         author_name = item["snippet"]["topLevelComment"]["snippet"]["authorDisplayName"]
+#         author_ID = item["snippet"]["topLevelComment"]["snippet"]["authorChannelId"]["value"]
+#         timestamp = item["snippet"]["topLevelComment"]["snippet"]["updatedAt"]
+#         top_level = True
 
-        # FILL IN THE OUTPUT DICT
-        data["comments_by_ID"][commentID] = {
-            'author_ID': author_ID,
-            'comment_txt': comment_txt,
-            'timestamp': timestamp,
-            'top_level': top_level,
-            'videoID': videoID
-        }
+#         # FILL IN THE OUTPUT DICT
+#         data["comments_by_ID"][commentID] = {
+#             'author_ID': author_ID,
+#             'comment_txt': comment_txt,
+#             'timestamp': timestamp,
+#             'top_level': top_level,
+#             'videoID': videoID
+#         }
 
-        data["commentIDs"].append(commentID)
+#         data["commentIDs"].append(commentID)
 
-        if not "author_ID" in data["authors_by_ID"]:
-            data["authors_by_ID"][author_ID] = {
-                "autor_name": author_name,
-                'author_ID': author_ID
-            }
-            data["authorIDs"].append(author_ID)
+#         if not "author_ID" in data["authors_by_ID"]:
+#             data["authors_by_ID"][author_ID] = {
+#                 "autor_name": author_name,
+#                 'author_ID': author_ID
+#             }
+#             data["authorIDs"].append(author_ID)
 
-        # IF THERE ARE REPLIES ADD THESE TO THE EXPORT DATA
-        if "replies" in item:
-            counter = 0
-            for reply in item["replies"]["comments"]:
+#         # IF THERE ARE REPLIES ADD THESE TO THE EXPORT DATA
+#         if "replies" in item:
+#             counter = 0
+#             for reply in item["replies"]["comments"]:
 
-                # REPLY COMMENTS HAVE ADDITIONAL KEYS reply_no & parent_comment
-                parent_comment = commentID
-                top_level = False
-                reply_no = counter
-                counter += 1
-                commentID = reply["id"]
-                comment_txt = reply["snippet"]["textOriginal"]
-                author_name = reply["snippet"]["authorDisplayName"]
-                author_ID = reply["snippet"]["authorChannelId"]["value"]
-                timestamp = reply["snippet"]["updatedAt"]
+#                 # REPLY COMMENTS HAVE ADDITIONAL KEYS reply_no & parent_comment
+#                 parent_comment = commentID
+#                 top_level = False
+#                 reply_no = counter
+#                 counter += 1
+#                 commentID = reply["id"]
+#                 comment_txt = reply["snippet"]["textOriginal"]
+#                 author_name = reply["snippet"]["authorDisplayName"]
+#                 author_ID = reply["snippet"]["authorChannelId"]["value"]
+#                 timestamp = reply["snippet"]["updatedAt"]
 
-                data["comments_by_ID"][commentID] = {
-                    'author_ID': author_ID,
-                    'comment_txt': comment_txt,
-                    'timestamp': timestamp,
-                    'top_level': top_level,
-                    'videoID': videoID,
-                    'reply_no': reply_no,
-                    'parent_comment': parent_comment
-                }
+#                 data["comments_by_ID"][commentID] = {
+#                     'author_ID': author_ID,
+#                     'comment_txt': comment_txt,
+#                     'timestamp': timestamp,
+#                     'top_level': top_level,
+#                     'videoID': videoID,
+#                     'reply_no': reply_no,
+#                     'parent_comment': parent_comment
+#                 }
 
-                data["commentIDs"].append(commentID)
+#                 data["commentIDs"].append(commentID)
 
-                if not "author_ID" in data["authors_by_ID"]:
-                    data["authors_by_ID"][author_ID] = {
-                        "autor_name": author_name,
-                        'author_ID': author_ID
-                    }
-                    data["authorIDs"].append(author_ID)
+#                 if not "author_ID" in data["authors_by_ID"]:
+#                     data["authors_by_ID"][author_ID] = {
+#                         "autor_name": author_name,
+#                         'author_ID': author_ID
+#                     }
+#                     data["authorIDs"].append(author_ID)
 
-    return data
+#     return data
 
 
 # CREATES ENTRY AND EXPORTS IT TO FILE

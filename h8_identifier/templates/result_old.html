@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<h1>H8-Identifier</h1>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/{{id}}" frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen></iframe>
+<h2>{{title}}</h2>
+<p class="vid-description">{{description}}...</p>
+<p>{{chanel_title}}</p>
+
+
+<div class="infobox">
+  <div class="icons">
+    <p>Comments: {{number_of_comments}}</p>
+    <p>Hate Content: {{percent_hate}}</p>
+    <p>Views: {{views}}</p>
+    <p>Shared: {{shared}}</p>
+  </div>
+  <p class="vid-analysis">This video has <span class="highlight">{{ number_of_comments }}</span> comments. It has <span
+      class="highlight">{{
+      views }}</span> views which means that <span class="highlight">{{ comments_per_view }} out of 100</span>
+    viewers has left a comment It is regarded as hateful because <span class="highlight">{{ percent_hate }}%</span> of
+    the comments are hateful, discriminatory or racist according to our algorithm. The video has been shared <span
+      class="highlight">{{ shared }}</span> times</p>
+</div>
+
+<div class="comment-section">
+  <ul>
+    {%for comment in comments%}
+    <li>
+      <p>{{comment.timestamp}}</p>
+      <p>{{comment.comment_txt}}</p>
+    </li>
+    {%endfor%}
+  </ul>
+</div>
+
+{% endblock %}

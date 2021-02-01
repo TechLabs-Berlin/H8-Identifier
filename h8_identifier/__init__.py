@@ -43,6 +43,7 @@ def create_app(test_config=None):
     @app.route('/result/<id>')
     def result(id):
         result = generate_output(id)
+        print(result)
 
         title = result["title"]
         description = result["description"][0:200]

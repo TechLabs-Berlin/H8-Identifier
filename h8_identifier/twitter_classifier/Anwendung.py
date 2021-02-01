@@ -21,48 +21,51 @@ from sklearn.feature_extraction.text import CountVectorizer
 
 np.set_printoptions(threshold=sys.maxsize)
 
-REPLACE_NO_SPACE = re.compile("(\.)|(\;)|(\:)|(\!)|(\')|(\?)|(\,)|(\")|(\|)|(\()|(\))|(\[)|(\])|(\%)|(\$)|(\>)|(\<)|(\{)|(\})")
+REPLACE_NO_SPACE = re.compile(
+    "(\.)|(\;)|(\:)|(\!)|(\')|(\?)|(\,)|(\")|(\|)|(\()|(\))|(\[)|(\])|(\%)|(\$)|(\>)|(\<)|(\{)|(\})")
 REPLACE_WITH_SPACE = re.compile("(<br\s/><br\s/?)|(-)|(/)|(:).")
 
+
 def clean_tweets(df):
-  tempArr = []
-  for line in df:
-    # send to tweet_processor
-    tmpL = p.clean(line)
-    # remove puctuation
-    tmpL = REPLACE_NO_SPACE.sub("", tmpL.lower()) # convert all tweets to lower cases
-    tmpL = REPLACE_WITH_SPACE.sub(" ", tmpL)
-    tempArr.append(tmpL)
-  return tempArr
+    tempArr = []
+    for line in df:
+        # send to tweet_processor
+        tmpL = p.clean(line)
+        # remove puctuation
+        # convert all tweets to lower cases
+        tmpL = REPLACE_NO_SPACE.sub("", tmpL.lower())
+        tmpL = REPLACE_WITH_SPACE.sub(" ", tmpL)
+        tempArr.append(tmpL)
+    return tempArr
+
 
 def predict(df, hate=10):
-  test = pd.DataFrame(df)
-  bla = test.copy()
+    test = pd.DataFrame(df)
+    bla = test.copy()
 
-  test_tweet = clean_tweets(test["tweet"])
+    test_tweet = clean_tweets(test["tweet"])
 
-  test["clean_tweet"] = test_tweet
+    test["clean_tweet"] = test_tweet
 
+    with open('h8_identifier/twitter_classifier/vectorizer.pkl', 'rb') as f:
+        vectorizer = pickle.load(f)
 
-  with open('h8_identifier/twitter_classifier/vectorizer.pkl', 'rb') as f:
-      vectorizer = pickle.load(f)
+    x_test_vec = vectorizer.transform(test_tweet)
 
-  x_test_vec = vectorizer.transform(test_tweet)
+    with open('h8_identifier/twitter_classifier/model.pkl', 'rb') as f:
+        svm = pickle.load(f)
+    y_pred_svm = svm.predict(x_test_vec)
 
-  with open('h8_identifier/twitter_classifier/model.pkl', 'rb') as f:
-      svm = pickle.load(f)
-  y_pred_svm = svm.predict(x_test_vec)
+    hateful_comments = []
 
-  hateful_comments = []
+    for i, value in enumerate(y_pred_svm):
+        if value == 1:
+            hateful_comments.append(bla.iloc[i])
 
-  for i, value in enumerate(y_pred_svm):
-    if value == 1:
-      hateful_comments.append(bla.iloc[i])
-  
-  count_hate = sum(y_pred_svm)
-  count_comments = len(y_pred_svm)
-  hate_ratio = count_hate/count_comments
-  percentage = "{:.0%}".format(hate_ratio)
-  first_hate = hateful_comments[:hate]
+    count_hate = sum(y_pred_svm)
+    count_comments = len(y_pred_svm)
+    hate_ratio = count_hate/count_comments
+    percentage = "{:.0%}".format(hate_ratio)
+    first_hate = hateful_comments[:hate]
 
-  return [first_hate, count_hate, count_comments, percentage]
+    return [first_hate, count_hate, count_comments, percentage]
