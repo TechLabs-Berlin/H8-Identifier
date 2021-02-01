@@ -41,6 +41,7 @@ def clean_tweets(df):
 
 def predict(df, hate=10):
     test = pd.DataFrame(df)
+    print(test)
     bla = test.copy()
 
     test_tweet = clean_tweets(test["tweet"])
@@ -60,7 +61,7 @@ def predict(df, hate=10):
 
     for i, value in enumerate(y_pred_svm):
         if value == 1:
-            hateful_comments.append(bla.iloc[i])
+            hateful_comments.append(test.tweet.iloc[i])
 
     count_hate = sum(y_pred_svm)
     count_comments = len(y_pred_svm)
