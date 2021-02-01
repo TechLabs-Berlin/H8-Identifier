@@ -21,10 +21,26 @@ find .env_sample
 replace "YOUR KEY GOES HERE" with your own key
 
 rename file to ".env"
+## install dependencies
+
+enter virtual environment. In the console write
+```console
+pipenv shell
+```
+
+then
+```console
+pipenv install
+``` 
 
 ## Start app
 
-start the application by executing
+if you are not in the pipenv shell already enter
+```console
+pipenv shell
+```
+
+then start the application by executing
 ```console
 flask run
 ```

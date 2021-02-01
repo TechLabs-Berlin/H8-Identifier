@@ -8,3 +8,4 @@ video_data.json
 train_data
 twitter_classifier.py
 h8_identifier.egg-info
+.env
