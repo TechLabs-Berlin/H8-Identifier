@@ -18,16 +18,6 @@ print(get_prediction(get_id_from_url("https://www.youtube.com/watch?v=6eGEX_LTqh
   - first_hate: First 10 hate comments
 
 More information below
-# test.py 
-
-This file only contains get_id_from_url and get_prediction from url_to_hate.py to test the pipeline.
-Just change the url and you will receive hate comments. You might choose rather controversial youtube videos for test.
-
-Issue:
-- As for now you need to be in cd /H8-Identifier/backend/twitter_classifier to run test.py
-- Update 30.01.2021: __init__.py is in that directory however still following error
-  - FileNotFoundError: [Errno 2] No such file or directory: 'vectorizer.pkl'
-- If you can fix the bug so that you can run it also from main directory, please update - thanks a lot
 
 # url_to_hate.py takes a youtube video ID and generates predictions
 This project defines the function get_prediction(vidID, hate=10)
