@@ -51,9 +51,9 @@
     </div>
     <div class="container">
       <div class="row">
-        <p>This video has {{ number_of_comments }}comments. It has {{
-          views }} views which means that {{ comments_per_view }} out of 100
-          viewers has left a comment It is regarded as hateful because { percent_hate }}% of
+        <p>This video has {{ number_of_comments }} comments. It has {{
+          views }} views which means that {{ comments_per_view * 100 }} out of 100
+          viewers has left a comment It is regarded as hateful because {{ percent_hate }} of
           the comments are hateful, discriminatory or racist according to our algorithm. The video has been shared {{
           shared }} times</p>
       </div>
