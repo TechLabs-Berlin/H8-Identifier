@@ -8,16 +8,12 @@ def generate_output(id):
     title, description, chanel_title = get_title_and_description(id)
     comments, count_hate, count, percentage = get_prediction(id)
 
-    for comment in comments:
-        print(type(comment))
-        print("COMMENT", comment)
-
     data_dict = {
         "title": title,
         "description": description,
         "chanel_title": chanel_title,
-        "number_of_comments": random.randint(1, 101),
-        "percent_hate": random.randint(1, 101),
+        "number_of_comments": count,
+        "percent_hate": percentage,
         "views": random.randint(1, 100001),
         "shared": random.randint(1, 100001),
         "comments": comments

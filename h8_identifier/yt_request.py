@@ -1,8 +1,11 @@
 from googleapiclient.discovery import build
 from .twitter_classifier.url_to_hate import filter_for_comments
-from .myAPI import APIkey
+#from .myAPI import APIkey
 import json
 import requests
+import os
+
+APIkey = os.environ['APIkey']
 
 service = build('youtube', 'v3', developerKey=APIkey)
 vidID = "_1M1rhO5rXo"

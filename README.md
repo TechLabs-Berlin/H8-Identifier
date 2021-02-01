@@ -2,6 +2,36 @@
 ## Our mission
 There should be no hateful comments on youtube. We wanted to train a classifier, which can differentiate between hate and non-hate speech. h8 identifier should give a warning if the threshold for too much hate is reached before such a message can be spread to cause more harm. The background of our work can be read in this blog https://docs.google.com/document/d/1NstPggR4KkS7970cDHlb0RMnXUuh7GtmsHXo-4QUdsY/edit.
 
+
+# Get Started
+
+## Clone the repo to your machine
+
+```console
+$ git clone https://github.com/TechLabs-Berlin/H8-Identifier.git
+```
+
+## Get a Google API-Key
+https://developers.google.com/maps/documentation/javascript/get-api-key
+
+## Setup .env file
+
+find .env_sample
+
+replace "YOUR KEY GOES HERE" with your own key
+
+rename file to ".env"
+
+## Start app
+
+start the application by executing
+```console
+flask run
+```
+
+
+
+
 # Backend
 ## The classifier
 This project defines the function *get_prediction(vidID, hate=10)* which can be run on the server. Here more details: get_prediction(vidID) takes a video ID. You have to replace vidID = get_id_from_url(url) in order to directly input a youtube url

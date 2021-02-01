@@ -6,6 +6,7 @@ from .helper import get_id_from_url, get_title_and_description
 
 
 def create_app(test_config=None):
+
     load_dotenv()
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
