@@ -4,6 +4,7 @@ from flask import Flask, render_template, request, redirect
 from .pipeline import generate_output
 from .helper import get_id_from_url, get_title_and_description
 
+
 def create_app(test_config=None):
     load_dotenv()
     # create and configure the app
@@ -29,6 +30,7 @@ def create_app(test_config=None):
     def index():
         if request.method == 'POST':
             vid_url = request.form["vid_url"]
+            print(vid_url)
             id = get_id_from_url(vid_url)
 
             if id == -1:
@@ -36,7 +38,7 @@ def create_app(test_config=None):
             else:
                 return redirect(f'/result/{id}')
         else:
-            return render_template('/index.html')
+            return render_template('/index_old.html')
 
     @app.route('/result/<id>')
     def result(id):
@@ -53,7 +55,7 @@ def create_app(test_config=None):
 
         comments_per_view = (number_of_comments/views)
 
-        return render_template('result.html',
+        return render_template('result_old.html',
                                id=id,
                                title=title,
                                description=description,
