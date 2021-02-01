@@ -6,8 +6,11 @@ from .twitter_classifier.url_to_hate import get_prediction
 def generate_output(id):
 
     title, description, chanel_title = get_title_and_description(id)
-    total, comments, percentage = get_prediction(id)
-    print(total)
+    comments, count_hate, count, percentage = get_prediction(id)
+
+    for comment in comments:
+        print(type(comment))
+        print("COMMENT", comment)
 
     data_dict = {
         "title": title,

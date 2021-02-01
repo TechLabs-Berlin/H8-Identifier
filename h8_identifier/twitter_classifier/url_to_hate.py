@@ -72,4 +72,6 @@ def get_vid_data(vidID):
 
 
 def get_prediction(vidID, hate=10):
-    return predict(get_vid_data(vidID), hate)
+    prediction = predict(get_vid_data(vidID), hate)
+
+    return prediction
