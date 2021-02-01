@@ -1,12 +1,13 @@
 from googleapiclient.discovery import build
-from myAPI import APIkey
+from ..myAPI import APIkey
 import pandas as pd
 import json
-from Anwendung import predict
+from .Anwendung import predict
 import requests
 
 service = build('youtube', 'v3', developerKey=APIkey)
 # get vid id from URL-string
+
 
 def get_id_from_url(url):
     index = url.find('v=')
@@ -17,6 +18,7 @@ def get_id_from_url(url):
         return index
     return id
 # FILTERS ONLY Comment texts OUT OF DICT AND RETURNS comments as tweet
+
 
 def filter_for_comments(json):
     # CREATE EMPTY DICT
@@ -35,11 +37,11 @@ def filter_for_comments(json):
                 tweet = reply["snippet"]["textOriginal"]
                 data.append({
                     'tweet': tweet
-                })     
+                })
     return data
-    
 
-#MAKES A GET REQUEST AND RETURNS A DICT/JSON
+
+# MAKES A GET REQUEST AND RETURNS A DICT/JSON
 
 def get_vid_data(vidID):
     request = service.commentThreads().list(
@@ -51,7 +53,7 @@ def get_vid_data(vidID):
     new_dict = json.dumps(response, indent=2)
     json_object = json.loads(new_dict)
     data = filter_for_comments(json_object)
-    
+
     while json_object.get("nextPageToken"):
         request = service.commentThreads().list(
             part="snippet, replies",
@@ -63,10 +65,11 @@ def get_vid_data(vidID):
         tmp_dict = json.dumps(response, indent=2)
         json_object = json.loads(tmp_dict)
         data.extend(filter_for_comments(json_object))
-                    
+
     # with open('test.json', 'w') as file:
     #     json.dump(data, file)
     return data
+
 
 def get_prediction(vidID, hate=10):
     return predict(get_vid_data(vidID), hate)
