@@ -38,7 +38,7 @@ def create_app(test_config=None):
             else:
                 return redirect(f'/result/{id}')
         else:
-            return render_template('/index_old.html')
+            return render_template('/index.html')
 
     @app.route('/result/<id>')
     def result(id):
@@ -56,7 +56,7 @@ def create_app(test_config=None):
 
         comments_per_view = (number_of_comments/views)
 
-        return render_template('result_old.html',
+        return render_template('result.html',
                                id=id,
                                title=title,
                                description=description,
