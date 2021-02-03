@@ -41,9 +41,6 @@ def clean_tweets(df):
 
 def predict(df, hate=10):
     test = pd.DataFrame(df)
-    print(test)
-    bla = test.copy()
-
     test_tweet = clean_tweets(test["tweet"])
 
     test["clean_tweet"] = test_tweet

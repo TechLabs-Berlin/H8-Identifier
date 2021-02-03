@@ -1,6 +1,5 @@
 import os
 from googleapiclient.discovery import build
-#from ..myAPI import APIkey
 import pandas as pd
 import json
 from .Anwendung import predict
@@ -10,7 +9,6 @@ APIkey = os.environ['APIkey']
 
 service = build('youtube', 'v3', developerKey=APIkey)
 # get vid id from URL-string
-
 
 def get_id_from_url(url):
     index = url.find('v=')
@@ -69,10 +67,7 @@ def get_vid_data(vidID):
         json_object = json.loads(tmp_dict)
         data.extend(filter_for_comments(json_object))
 
-    # with open('test.json', 'w') as file:
-    #     json.dump(data, file)
     return data
-
 
 def get_prediction(vidID, hate=10):
     prediction = predict(get_vid_data(vidID), hate)
