@@ -25,6 +25,10 @@ REPLACE_NO_SPACE = re.compile(
     "(\.)|(\;)|(\:)|(\!)|(\')|(\?)|(\,)|(\")|(\|)|(\()|(\))|(\[)|(\])|(\%)|(\$)|(\>)|(\<)|(\{)|(\})")
 REPLACE_WITH_SPACE = re.compile("(<br\s/><br\s/?)|(-)|(/)|(:).")
 
+with open('h8_identifier/twitter_classifier/vectorizer.pkl', 'rb') as f:
+    vectorizer = pickle.load(f)
+with open('h8_identifier/twitter_classifier/model.pkl', 'rb') as f:
+    svm = pickle.load(f)
 
 def clean_tweets(df):
     tempArr = []
@@ -38,32 +42,30 @@ def clean_tweets(df):
         tempArr.append(tmpL)
     return tempArr
 
-
 def predict(df, hate=10):
     test = pd.DataFrame(df)
     test_tweet = clean_tweets(test["tweet"])
 
     test["clean_tweet"] = test_tweet
 
-    with open('h8_identifier/twitter_classifier/vectorizer.pkl', 'rb') as f:
-        vectorizer = pickle.load(f)
-
     x_test_vec = vectorizer.transform(test_tweet)
-
-    with open('h8_identifier/twitter_classifier/model.pkl', 'rb') as f:
-        svm = pickle.load(f)
+ 
     y_pred_svm = svm.predict(x_test_vec)
+    test["prediction"] = y_pred_svm
 
-    hateful_comments = []
+    y_pred_proba = svm.predict_proba(x_test_vec)
+    proba = []
+    for i in y_pred_proba:
+        a = i[0]
+        proba.append(a)
+    test["proba"] = proba
+    test_sort = test.sort_values(by=["proba"], ascending=False)
 
-    for i, value in enumerate(y_pred_svm):
-        if value == 1:
-            hateful_comments.append(test.tweet.iloc[i])
-
-    count_hate = sum(y_pred_svm)
+    hateful_comments = test_sort[(test_sort["prediction"]==1) & (test_sort["proba"]>= 0.9)]
+    count_hate = len(hateful_comments)
     count_comments = len(y_pred_svm)
     hate_ratio = count_hate/count_comments
     percentage = "{:.0%}".format(hate_ratio)
-    first_hate = hateful_comments[:hate]
+    first_hate = hateful_comments[["tweet", "proba"]][:hate]
 
     return [first_hate, count_hate, count_comments, percentage]
