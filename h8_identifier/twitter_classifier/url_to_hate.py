@@ -2,12 +2,13 @@ import os
 from googleapiclient.discovery import build
 import pandas as pd
 import json
-from .Anwendung import predict
-import requests
+from .classifier import predict
 
 APIkey = os.environ['APIkey']
 
 service = build('youtube', 'v3', developerKey=APIkey)
+
+MAX_REQUEST_NUMBER = 20
 # get vid id from URL-string
 
 def get_id_from_url(url):
@@ -45,30 +46,29 @@ def filter_for_comments(json):
 # MAKES A GET REQUEST AND RETURNS A DICT/JSON
 
 def get_vid_data(vidID):
+    number_of_requests = 1
+
     request = service.commentThreads().list(
         part="snippet, replies",
         videoId=vidID,
         maxResults=100
     )
     response = request.execute()
-    new_dict = json.dumps(response, indent=2)
-    json_object = json.loads(new_dict)
-    data = filter_for_comments(json_object)
+    data = filter_for_comments(response)
 
-    while json_object.get("nextPageToken"):
+    while response.get("nextPageToken") and number_of_requests <= MAX_REQUEST_NUMBER:
+        number_of_requests += 1
         request = service.commentThreads().list(
             part="snippet, replies",
             videoId=vidID,
             maxResults=100,
-            pageToken=json_object.get("nextPageToken")
+            pageToken=response.get("nextPageToken")
         )
         response = request.execute()
-        tmp_dict = json.dumps(response, indent=2)
-        json_object = json.loads(tmp_dict)
-        data.extend(filter_for_comments(json_object))
+        data.extend(filter_for_comments(response))
 
     return data
 
-def get_prediction(vidID, hate=10):
-    prediction = predict(get_vid_data(vidID), hate)
+def get_prediction(vidID, hate=10, sensitivity = 0.6):
+    prediction = predict(get_vid_data(vidID), hate, sensitivity)
     return prediction
