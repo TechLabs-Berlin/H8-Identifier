@@ -8,6 +8,7 @@ import requests
 
 APIkey = os.environ['APIkey']
 
+
 service = build('youtube', 'v3', developerKey=APIkey)
 # get vid id from URL-string
 
