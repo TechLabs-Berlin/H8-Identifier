@@ -59,15 +59,14 @@
       <div class="row">
         <p>We have analized the first {{ number_of_comments }} comments. It has {{
           views }} views which means that {{ comments_per_view }} out of 100
-          viewers has left a comment It is regarded as hateful because {{ percent_hate }}% of
-          the comments are hateful, discriminatory or racist according to our algorithm. The video has been shared {{
-          shared }} times</p>
+          viewers has left a comment. {{ percent_hate }}% of
+          the comments are hateful, discriminatory or racist according to our algorithm.</p>
       </div>
     </div>
     <div class="container">
       <div class="row">
         {%if percent_hate == 0 %}
-        <p>H8 identifier did not detect hate speed now. Enjoy your hate freee youtube experience!</p>
+        <p>H8 identifier did not detect hate speed now. Enjoy your hate free youtube experience!</p>
         {%elif percent_hate <= 2 %} <p>H8 identifier detected a very low percentage of hate comments. It is unlikely
           that you will encounter a hateful comment during your youtube experience.</p>
           {%elif percent_hate <= 10 %} <p>H8 identifier detected a low percentage of hate comments. It is unlikely but
