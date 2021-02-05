@@ -8,7 +8,7 @@ import random
 APIkey = os.environ['APIkey']
 
 service = build('youtube', 'v3', developerKey=APIkey)
-vidID = "_1M1rhO5rXo"
+
 
 
 # get vid id from URL-string
