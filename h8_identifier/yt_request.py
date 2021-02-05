@@ -55,10 +55,6 @@ def get_comment_data(vidID):
     new_dict = json.dumps(response, indent=2)
     json_object = json.loads(new_dict)
 
-    # GENERATES JSON WITH WHOLE DATA FOR A BETTER OVERVIEW
-
-    with open("whole_data.json", "w") as outfile:
-        json.dump(json_object, outfile)
     return json_object
 
 
