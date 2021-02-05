@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 from flask import Flask, render_template, request, redirect
 from .pipeline import generate_output
-from .helper import get_id_from_url, get_title_and_description
+from .yt_request import get_id_from_url, get_title_and_description
 
 
 def create_app(test_config=None):
@@ -44,7 +44,7 @@ def create_app(test_config=None):
     @app.route('/result/<id>')
     def result(id):
         result = generate_output(id)
-        #print(result)
+        # print(result)
 
         title = result["title"]
         description = result["description"][0:200]

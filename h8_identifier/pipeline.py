@@ -1,5 +1,5 @@
 import random
-from .helper import get_title_and_description
+from .yt_request import get_title_and_description
 from .twitter_classifier.url_to_hate import get_prediction
 
 
