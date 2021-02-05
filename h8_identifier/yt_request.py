@@ -10,7 +10,6 @@ APIkey = os.environ['APIkey']
 service = build('youtube', 'v3', developerKey=APIkey)
 
 
-
 # get vid id from URL-string
 
 def get_id_from_url(url):
@@ -22,6 +21,7 @@ def get_id_from_url(url):
         return index
     return id
 
+
 def get_title_and_description(id):
     data = get_vid_data(id)
     title = data["items"][0]["snippet"]["title"]
@@ -29,7 +29,6 @@ def get_title_and_description(id):
     chanel_title = data["items"][0]["snippet"]["channelTitle"]
 
     return title, description, chanel_title
-
 
 
 def get_vid_data(vidID):
@@ -52,11 +51,7 @@ def get_comment_data(vidID):
         maxResults=100
     )
     response = request.execute()
-    new_dict = json.dumps(response, indent=2)
-    json_object = json.loads(new_dict)
-
-    return json_object
-
+    return response
 
 
 def create_entry(vidID):
