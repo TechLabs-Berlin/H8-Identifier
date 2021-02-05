@@ -44,6 +44,7 @@ def create_app(test_config=None):
     @app.route('/result/<id>')
     def result(id):
         result = generate_output(id)
+        #print(result)
 
         title = result["title"]
         description = result["description"][0:200]
@@ -54,7 +55,7 @@ def create_app(test_config=None):
         shared = result["shared"]
         comments = result["comments"]
 
-        comments_per_view = (number_of_comments/views)
+        comments_per_view = round((number_of_comments/views) * 100, 1)
 
         return render_template('result.html',
                                id=id,
@@ -71,5 +72,9 @@ def create_app(test_config=None):
     @app.route('/error')
     def error():
         return render_template('error.html')
+
+    @app.route('/about')
+    def about():
+        return render_template('about.html')
 
     return app

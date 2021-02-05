@@ -21,8 +21,6 @@ from sklearn.feature_extraction.text import CountVectorizer
 train = pd.read_csv("./train_data/train.csv")
 test = pd.read_csv("./train_data/test.csv")
 
-train.isnull().sum()
-
 REPLACE_NO_SPACE = re.compile("(\.)|(\;)|(\:)|(\!)|(\')|(\?)|(\,)|(\")|(\|)|(\()|(\))|(\[)|(\])|(\%)|(\$)|(\>)|(\<)|(\{)|(\})")
 REPLACE_WITH_SPACE = re.compile("(<br\s/><br\s/?)|(-)|(/)|(:).")
 

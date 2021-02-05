@@ -1,11 +1,21 @@
 {% extends 'base.html' %}
 
 {% block body %}
-<h1>Oh noooo</h1>
-<p>something went wrong…
-  <br>was that really a video-URL?
-</p>
-<a href="/"><button>try again</button></a>
-
+<div class="col-xs-12" style="height:200px;"></div>
+<main role="main" class="d-flex justify-content-center">
+  <div class="starter-template">
+    <div class="container">
+      <div class="row ">
+        <div class="col-md-2 center"></div>
+        <div class="col-md-8 text-center">
+          <i class="bi bi-emoji-frown " style="font-size: 10rem; color: red;"></i>
+          <h1>Something went wrong… </h1>
+          <p>Was that really a Youtube video-URL?</p>
+          <a href="/"><button class="btn btn-primary btn-lg btn-block" type="submit">Retry</button></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
 
 {% endblock %}
