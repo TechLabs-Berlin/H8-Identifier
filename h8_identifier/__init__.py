@@ -50,7 +50,8 @@ def create_app(test_config=None):
         number_of_comments = result["number_of_comments"]
         percent_hate = result["percent_hate"]
         views = result["views"]
-        shared = result["shared"]
+        likes = result["likes"]
+        dislikes = result["dislikes"]
         comments = result["comments"]
 
         comments_per_view = round((number_of_comments/views) * 100, 1)
@@ -63,7 +64,8 @@ def create_app(test_config=None):
                                number_of_comments=number_of_comments,
                                percent_hate=percent_hate,
                                views=views,
-                               shared=shared,
+                               likes=likes,
+                               dislikes=dislikes,
                                comments=comments,
                                comments_per_view=comments_per_view)
 

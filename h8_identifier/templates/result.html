@@ -42,17 +42,23 @@
           <p>Views: {{views}}</p>
         </div>
         <div class="col-sm-1">
-          <i class="bi bi-share" style="font-size: 2.5rem"></i>
+          <i class="bi bi-hand-thumbs-up" style="font-size: 2.5rem"></i>
         </div>
         <div class="col-sm-2">
-          <p>{{shared}}</p>
+          <p>{{likes}}</p>
+        </div>
+        <div class="col-sm-1">
+          <i class="bi bi-hand-thumbs-down" style="font-size: 2.5rem"></i>
+        </div>
+        <div class="col-sm-2">
+          <p>{{dislikes}}</p>
         </div>
       </div>
     </div>
     <div class="container">
       <div class="row">
         <p>We have analized the first {{ number_of_comments }} comments. It has {{
-          views }} views which means that {{ comments_per_view  }} out of 100
+          views }} views which means that {{ comments_per_view }} out of 100
           viewers has left a comment It is regarded as hateful because {{ percent_hate }}% of
           the comments are hateful, discriminatory or racist according to our algorithm. The video has been shared {{
           shared }} times</p>
@@ -61,29 +67,30 @@
     <div class="container">
       <div class="row">
         {%if percent_hate == 0 %}
-          <p>H8 identifier did not detect hate speed now. Enjoy your hate freee youtube experience!</p>
-        {%elif percent_hate <= 2 %}
-          <p>H8 identifier detected a very low percentage of hate comments. It is unlikely that you will encounter a hateful comment during your youtube experience.</p>
-        {%elif percent_hate <= 10 %}
-          <p>H8 identifier detected a low percentage of hate comments. It is unlikely but possible that you will encounter a hateful comment during your youtube experience.</p>
-        {%elif percent_hate <= 50 %}
-          <p>H8 identifier detected a relevant number of hate comments. It is possible that you will encounter a hateful comment during your youtube experience.</p>
-        {%else %}
-          <p>Attention: H8 identifier detected a hich percentage of hate comments. More than 1 in 2 comments is considered hateful. We advice you to ignore the comments during your youtube experience.</p>
-        {%endif%}
-        <div class="col-md-2 center"></div>
-        <div class="col-md-8 center">
-          <div class="comment-section">
-            <ul>
-              {%for comment in comments%}
-              <li>
-                <p>{{comment.tweet}}</p>
-              </li>
-              {%endfor%}
-            </ul>
-          </div>
-          <div class="col-md-2 center"></div>
-        </div>
+        <p>H8 identifier did not detect hate speed now. Enjoy your hate freee youtube experience!</p>
+        {%elif percent_hate <= 2 %} <p>H8 identifier detected a very low percentage of hate comments. It is unlikely
+          that you will encounter a hateful comment during your youtube experience.</p>
+          {%elif percent_hate <= 10 %} <p>H8 identifier detected a low percentage of hate comments. It is unlikely but
+            possible that you will encounter a hateful comment during your youtube experience.</p>
+            {%elif percent_hate <= 50 %} <p>H8 identifier detected a relevant number of hate comments. It is possible
+              that you will encounter a hateful comment during your youtube experience.</p>
+              {%else %}
+              <p>Attention: H8 identifier detected a hich percentage of hate comments. More than 1 in 2 comments is
+                considered hateful. We advice you to ignore the comments during your youtube experience.</p>
+              {%endif%}
+              <div class="col-md-2 center"></div>
+              <div class="col-md-8 center">
+                <div class="comment-section">
+                  <ul>
+                    {%for comment in comments%}
+                    <li>
+                      <p>{{comment.tweet}}</p>
+                    </li>
+                    {%endfor%}
+                  </ul>
+                </div>
+                <div class="col-md-2 center"></div>
+              </div>
       </div>
 </main>
 

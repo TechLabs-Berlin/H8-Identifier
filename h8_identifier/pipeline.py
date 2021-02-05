@@ -16,7 +16,8 @@ def generate_output(id):
         "number_of_comments": commentCount,
         "percent_hate": percentage,
         "views": views,
-        "shared": random.randint(1, 100001),
+        "likes": likes,
+        "dislikes": dislikes,
         "comments": comments
     }
     return data_dict
