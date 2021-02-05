@@ -31,7 +31,6 @@ def create_app(test_config=None):
     def index():
         if request.method == 'POST':
             vid_url = request.form["vid_url"]
-            print(vid_url)
             id = get_id_from_url(vid_url)
 
             if id == -1:
@@ -44,7 +43,6 @@ def create_app(test_config=None):
     @app.route('/result/<id>')
     def result(id):
         result = generate_output(id)
-        # print(result)
 
         title = result["title"]
         description = result["description"][0:200]

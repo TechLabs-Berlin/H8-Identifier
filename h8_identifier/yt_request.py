@@ -34,7 +34,6 @@ def get_title_and_description(id):
 def get_vid_data(vidID):
     data = requests.get(
         f'https://www.googleapis.com/youtube/v3/videos?key={APIkey}&part=snippet&id={vidID}')
-    print(data.status_code)
     data_bytes = data.content
     data_json = data_bytes.decode('utf8')
     json_object = json.loads(data_json)
