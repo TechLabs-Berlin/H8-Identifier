@@ -3,23 +3,11 @@ from googleapiclient.discovery import build
 import pandas as pd
 import json
 from .classifier import predict
+from h8_identifier.yt_request import get_id_from_url, service, APIkey
 
-APIkey = os.environ['APIkey']
-
-
-service = build('youtube', 'v3', developerKey=APIkey)
 
 MAX_REQUEST_NUMBER = 20
-# get vid id from URL-string
 
-def get_id_from_url(url):
-    index = url.find('v=')
-    if index != -1:
-        id = url[index+2:]
-        return id
-    else:
-        return index
-    return id
 # FILTERS ONLY Comment texts OUT OF DICT AND RETURNS comments as tweet
 
 
@@ -70,6 +58,7 @@ def get_vid_data(vidID):
 
     return data
 
-def get_prediction(vidID, hate=10, sensitivity = 0.6):
+
+def get_prediction(vidID, hate=10, sensitivity=0.6):
     prediction = predict(get_vid_data(vidID), hate, sensitivity)
     return prediction
