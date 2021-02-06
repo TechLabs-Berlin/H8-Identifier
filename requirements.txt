@@ -1,0 +1,8 @@
+requests
+google-api-python-client
+sklearn
+pandas
+tweet-preprocessor
+python-dotenv
+numpy
+flask
