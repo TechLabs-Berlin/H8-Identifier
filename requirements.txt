@@ -6,3 +6,4 @@ tweet-preprocessor
 python-dotenv
 flask
 numpy
+gunicorn
