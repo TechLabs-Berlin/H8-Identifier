@@ -53,7 +53,7 @@ def get_all_vid_data(vidID, MAX_REQUEST_NUMBER = 20):
 
     return data
 
-def get_prediction(vidID, MAX_REQUEST_NUMBER = 20, hate=10, sensitivity=0.6):
-    '''makes MAX_REQUEST_NUMBER of requests, creates dataframe with comments text only and predicts them'''
-    prediction = predict(get_all_vid_data(vidID, MAX_REQUEST_NUMBER), hate, sensitivity)
+def get_prediction(vidID, MAX_REQUEST_NUMBER = 20, hate=10, threshold=0.6):
+    '''It makes MAX_REQUEST_NUMBER of requests, predict those comments and displays hate comments with highest predictions. Prediction are only maid above a threshold probability.'''
+    prediction = predict(get_all_vid_data(vidID, MAX_REQUEST_NUMBER), hate, threshold)
     return prediction
