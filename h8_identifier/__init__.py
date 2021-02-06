@@ -53,6 +53,7 @@ def create_app(test_config=None):
         likes = result["likes"]
         dislikes = result["dislikes"]
         comments = result["comments"]
+        number_of_analyzed_comments = result["number_of_analyzed_comments"]
 
         comments_per_view = round((number_of_comments/views) * 100, 1)
 
@@ -67,7 +68,8 @@ def create_app(test_config=None):
                                likes=likes,
                                dislikes=dislikes,
                                comments=comments,
-                               comments_per_view=comments_per_view)
+                               comments_per_view=comments_per_view,
+                               number_of_analyzed_comments = number_of_analyzed_comments)
 
     @app.route('/error')
     def error():
