@@ -7,7 +7,6 @@ Original file is located at
 """
 
 import sklearn
-import numpy as np
 import pandas as pd
 import re
 import preprocessor as p
@@ -18,8 +17,6 @@ from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import CountVectorizer
-
-np.set_printoptions(threshold=sys.maxsize)
 
 REPLACE_NO_SPACE = re.compile(
     "(\.)|(\;)|(\:)|(\!)|(\')|(\?)|(\,)|(\")|(\|)|(\()|(\))|(\[)|(\])|(\%)|(\$)|(\>)|(\<)|(\{)|(\})")
