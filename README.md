@@ -59,7 +59,7 @@ print(get_prediction(get_id_from_url("https://www.youtube.com/watch?v=6eGEX_LTqh
 More information below
 
 ## prediction.py takes a youtube video ID and generates predictions
-This project defines the function get_prediction(vidID), which takes a youtube video ID. It makes MAX_REQUEST_NUMBER of requests, predict those comments and displays hate comments with highest predictions. Prediction are only maid above a threshold probability. It does so by applying the predict() function from classifier.py
+This project defines the function get_prediction(vidID), which takes a youtube video ID. It makes MAX_REQUEST_NUMBER of requests, predict those comments and displays hate comments with highest predictions. Prediction are only valid above a threshold probability. It does so by applying the predict() function from classifier.py
 
 Input: 
 - youtube video ID
