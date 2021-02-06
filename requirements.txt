@@ -4,5 +4,5 @@ sklearn
 pandas
 tweet-preprocessor
 python-dotenv
-numpy
 flask
+numpy
