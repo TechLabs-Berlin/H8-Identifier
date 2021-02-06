@@ -1,6 +1,5 @@
-import random
 from .yt_request import get_data_for_page
-from .twitter_classifier.url_to_hate import get_prediction
+from .prediction import get_prediction
 
 
 def generate_output(id):
@@ -18,6 +17,7 @@ def generate_output(id):
         "views": views,
         "likes": likes,
         "dislikes": dislikes,
-        "comments": comments
+        "comments": comments,
+        "number_of_analyzed_comments": count
     }
     return data_dict
