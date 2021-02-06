@@ -1,1 +1,1 @@
-web: gunicorn h8_identifier.__init__
+web: gunicorn wsgi:app
