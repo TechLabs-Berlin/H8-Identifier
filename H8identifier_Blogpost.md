@@ -93,7 +93,7 @@ The about page gives more insights about our project goal.
 
 - Urs Schmidt
 - Thuy Anh Nguyen
-- Robin van de WaterUX
+- Robin van de Water
 
 We thank our mentor Felix Linker who kept us motivated and gave us guidance and input whenever needed.
 
