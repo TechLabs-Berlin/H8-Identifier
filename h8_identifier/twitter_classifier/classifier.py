@@ -42,9 +42,9 @@ def clean_tweets(df):
         tempArr.append(tmpL)
     return tempArr
 
-def predict(df, hate=10, sensitivity = 0.6):
+def predict(df, hate=10, threshold = 0.6):
     '''This function takes a dataset with comments labels as tweet and predicts the hatefulness.
-    Optional parameters are hate and sensitivity.
+    Optional parameters are hate and threshold.
     It returns 5 elements in this order [first_hate, count_hate, count_comments, hate_ratio]
     - first_hate: First hate comments as dict
     - count_hate: Total amount of hate comments= sum(y_pred_svm)
@@ -68,7 +68,7 @@ def predict(df, hate=10, sensitivity = 0.6):
     test["proba"] = proba
     test_sort = test.sort_values(by=["proba"], ascending=False)
 
-    hateful_comments = test_sort[(test_sort["prediction"]==1) & (test_sort["proba"]>= sensitivity)]
+    hateful_comments = test_sort[(test_sort["prediction"]==1) & (test_sort["proba"]>= threshold)]
     
     count_hate = len(hateful_comments)
     count_comments = len(y_pred_svm)
