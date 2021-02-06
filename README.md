@@ -105,6 +105,11 @@ Further details on the pretrained classifier and the training data set can be fo
 
 # Frontend
 
+# Prototype
+The Figma prototype can be found at the following web address: https://www.figma.com/file/ppGsy1cSvUC5peDyu3Qyt5/H8-Speech-Detector-Prototype?node-id=101%3A3521 
+
+# Design
+In the root folder the folder ux-design can be found with the Design report including user research, user stories, information architecture, and other design decisions.
 
 # Contributors
 - Thuy Anh Nguyen
