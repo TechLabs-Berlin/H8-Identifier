@@ -2,15 +2,12 @@ from googleapiclient.discovery import build
 import json
 import requests
 import os
-import random
 
 APIkey = os.environ['APIkey']
 service = build('youtube', 'v3', developerKey=APIkey)
 
-
-# get vid id from URL-string
-
 def get_id_from_url(url):
+    '''get vid id from URL-string'''
     index = url.find('v=')
     if index != -1:
         id = url[index+2:]
@@ -19,7 +16,6 @@ def get_id_from_url(url):
         return index
     return id
 
-
 def get_data_for_page(id):
     meta_data, activity_data = get_vid_data(id)
     title, description, chanel_title = get_title_and_description(meta_data)
@@ -27,7 +23,6 @@ def get_data_for_page(id):
         activity_data)
 
     return title, description, chanel_title, views, commentCount, likes, dislikes
-
 
 def get_title_and_description(meta_data):
     data = meta_data
