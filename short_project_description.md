@@ -10,5 +10,5 @@ Our project consists of following parts:
 1. Supervised Machine Learning: Train a Binary Classifier with a prelabeled dataset.
 2. Data import from Youtube, cleaning and analysis
 3. Machine Learning pipeline which takes a youtube video url and generates a feasible prediction of the hate.
-3. Develop a web application and visualize the personalized results of the hate in statistics relevant for the user.
-4. UX Design: Implement an optimal design.
+4. Develop a web application and visualize the personalized results of the hate in statistics relevant for the user.
+5. UX Design: Implement an optimal design.
