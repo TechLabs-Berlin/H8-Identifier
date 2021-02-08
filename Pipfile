@@ -12,6 +12,10 @@ tweet-preprocessor = "*"
 python-dotenv = "*"
 numpy = "*"
 
+flask = "*"
+flask-session = "*"
+requests = "*"
+
 [dev-packages]
 
 [requires]
