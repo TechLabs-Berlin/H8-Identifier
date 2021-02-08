@@ -14,7 +14,7 @@ numpy = "*"
 
 flask = "*"
 flask-session = "*"
-requests = "*"
+
 
 [dev-packages]
 
