@@ -16,7 +16,7 @@ Flask = "*"
 
 flask = "*"
 flask-session = "*"
-requests = "*"
+
 
 [dev-packages]
 
