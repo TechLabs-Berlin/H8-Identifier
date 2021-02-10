@@ -11,6 +11,12 @@ pandas = "*"
 tweet-preprocessor = "*"
 python-dotenv = "*"
 numpy = "*"
+gunicorn = "*"
+Flask = "*"
+
+flask = "*"
+flask-session = "*"
+
 
 flask = "*"
 flask-session = "*"
