@@ -2,26 +2,25 @@
 
 ## Hateful posts and cyberbullying disturb internet users
 
-Disturbing posts on minorities, political opponents and content creators can be found all over the internet. Some might be discomforting but others may be threatening. There are even structured, organized threats from right-wing trolls and conspiracy theorists, who deliberately torpedo discussions and flood the news feeds and comments of political opponents with hate, insults and death threats. In short: there should be no space for hate speech on the internet. The riots of the Capitol was just one of many events which could possibly be avoided if hate campaigns via social media were detected and the spread blocked.
+Disturbing posts about minorities, political opponents, and content creators can be found all over the internet. Some might be discomforting but others may be threatening. There are even structured, organized threats from right-wing trolls and conspiracy theorists, who deliberately torpedo discussions and flood the news feeds and comments of political opponents with hate, insults, and death threats. In short: there should be no space for hate speech on the internet. The recent riots of the Capitol were just one of many events that could be avoided if hate campaigns via social media were detected and the spread blocked.
 
 ## The idea of the h8 identifier was born.
 
 We wanted to train a classifier, which can differentiate between hate and non-hate speech. h8 identifier should give a warning if the threshold for too much hate is reached before such a message can be spread to cause more harm.
+We started with a team of five people with different backgrounds but one common interest: motivation to make the internet a friendlier place. In our vision, the h8 identifier should be displayed as a hate seismograph to screen hateful comments and posts. We focused on Youtube, one of the most frequented social media platforms nowadays. Our target group is the YouTuber, who can disable these comments, and also people who want to enjoy a video without hateful comments. The h8 identifier should work as a browser extension rather than a bot and ideally should have its own website for users to have a review and give feedback.
 
-We are a team of three people with different backgrounds but one common interest: motivation to make the internet a friendlier place. In our vision the h8 identifier should be displayed as a hate seismograph to screen hateful comments and posts. We focused on youtube, one of the most frequented social media platforms nowadays. Our target group is the youtuber, who can disable these comments, and also people who want to enjoy a video without hateful comments. The user can access the h8 identifier through a web application and input a youtube video url. H8 identifier will display the hate analysis and give recommendations based on the percentage of hate comments.
+Our team consists of three more experienced and two newbie-yet-motivated techies. Our project divided into two chunks:
 
-Our project is divided into two chunks:
-
-1. Developing a Machine Learning pipeline which takes comments of a youtube video and generates a feasible prediction of the hate.
+1. Developing a Machine Learning pipeline which takes comments of a Youtube video and generates a feasible prediction of the hate.
 2. Developing a web application and visualize the personalized results of the hate in statistics relevant for the user.
 
 # A The Machine Learning pipeline: from the youtube url to the hate prediction
 
 ## 1. Input Youtube comments in a JSON with a Youtube API.
 
-Google offers multiple Youtube APIs for different usage. The official Python client library can be found here [googleapiclient](https://googleapis.github.io/google-api-python-client/docs/epy/index.html). We found a suitable API to export youtube comments in a JSON file. Thanks to this helpful [repository.](https://github.com/googleapis/google-api-python-client)
+Google offers multiple Youtube APIs for different usage. The official Python client library can be found here [Google API Client](https://googleapis.github.io/google-api-python-client/docs/epy/index.html). We found a suitable API to export youtube comments in a JSON file. Thanks to this helpful [repository.](https://github.com/googleapis/google-api-python-client)
 
-One major limitation of the the Youtube API ([Comments: list  |  YouTube Data API  |  Google Developers](https://developers.google.com/youtube/v3/docs/comments/list)) is the limitation of 100 items per request. Nevertheless, this enables us to predict the hatefulness of the most recent 100 comments of a video.
+One major limitation of the the Youtube API ([Comments: list](https://developers.google.com/youtube/v3/docs/comments/list)) is the limitation of 100 items per request. Nevertheless, this enables us to predict the hatefulness of the most recent 100 comments of a video.
 
 Our solution for that problem: Using pageToken parameter from the API we can analyze all comments and subcomments. We successfully implemented that feature on 30.01.2021.
 
@@ -29,7 +28,7 @@ Next step is to filter for youtube comments ignoring irrelevant information such
 
 ## 2. Format and clean the data for the classifier to understand
 
-We extracted the text of comments and subcomments. Then we organized them in a pandas dataframe for further analysis. Major concerns were non -text characters such as @, #, : , etc. The[tweet-preprocessor library](https://pypi.org/project/tweet-preprocessor/) was a good start to clean the data.
+We extracted the text of comments and subcomments. Then we organized them in a pandas dataframe for further analysis. Major concerns were non -text characters such as @, #, : , etc. The [tweet-preprocessor library](https://pypi.org/project/tweet-preprocessor/) was a good start to clean the data.
 
 Since our model won&#39;t understand human language, the cleaned comments are converted in a numerical form: First the comments are tokenized into words, then the model will go through the stack of comments to count for each word. For that task we use the CountVectorizer from sklearn.
 
