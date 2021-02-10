@@ -113,7 +113,7 @@ In the root folder the folder ux-design can be found with the Design report incl
 
 # Contributors
 - Thuy Anh Nguyen
-- Urs Schmid
+- Urs Schmidt
 - Robin van de Water (UX Design)
 
 We thank our mentor Felix Linker who kept us motivated and gave us guidance and input whenever needed.
