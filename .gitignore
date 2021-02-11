@@ -9,3 +9,4 @@ train_data
 twitter_classifier.py
 h8_identifier.egg-info
 .env
+test.json

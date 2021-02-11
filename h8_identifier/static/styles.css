@@ -26,3 +26,8 @@
 .highlight{
   color:orange;
 }
+
+.h8-img {
+  width: 50vw;
+  max-width: 600px;
+}
